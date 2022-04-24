@@ -5,6 +5,7 @@ import {DEBUG, N, M} from './CONSTANTS'
 
 const AppContext = createContext()
 const AppProvider = ({children})=>{
+    
     //settings menu
     const [isSettings, setIsSettings] = useState(false);
     //settings menu
@@ -12,15 +13,11 @@ const AppProvider = ({children})=>{
     const toggleSettings = ()=>{
         setIsSettings(!isSettings);
     }
-
-
-
     return <AppContext.Provider value={{
         N, M, DEBUG,
         toggleSettings, isSettings}}>
         {children}
     </AppContext.Provider>
-
 }
 
 const useGlobalContext = ()=>{

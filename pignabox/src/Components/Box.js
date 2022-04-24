@@ -5,7 +5,6 @@ import {useCameraContext, usePlayerContext} from "../contexts"
 import plain from '../img/plain.png'
 import sand from '../img/sand.png'
 import water from '../img/water.png'
-import plaintree from '../img/plaintree.png'
 
 
 //1 - plain
@@ -23,8 +22,7 @@ function Box({children, xindex, yindex, value}) {
         value ==1 ? plain :
         value ==2 ? sand :
         value ==3 ? water :
-        value ==4 && !perspective ? plaintree :
-        value ==4 && perspective ? plain :
+        value ==4 ? plain :
         ""
       })`,
       cursor: (movementMatrix[yindex][xindex]>0 && playerStatus=== "READY" ? "pointer" : "default")

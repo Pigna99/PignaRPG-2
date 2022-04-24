@@ -4,6 +4,7 @@ import { useGlobalContext } from '../context'
 import { useBoardContext, useCameraContext } from "../contexts";
 import Side from "./Side";
 import Prop from "./Prop";
+import Enemy from "./Enemy";
 
 import tree from '../img/tree.png'
 
@@ -41,6 +42,7 @@ function Board() {
         })}
 
         <Player/>
+        <Enemy/>
         {
             matrix.map((row,i)=>row.map((el,j)=>{
                 if(el==4){

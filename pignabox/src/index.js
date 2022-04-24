@@ -6,6 +6,7 @@ import { AppProvider } from './context';
 import { CameraProvider } from './contexts/cameraContext';
 import { BoardProvider } from './contexts/boardContext';
 import { PlayerProvider } from './contexts/playerContext';
+import { EnemyProvider } from './contexts/enemyContext';
 
 
 
@@ -13,6 +14,7 @@ import { PlayerProvider } from './contexts/playerContext';
 // GLOBALCONTEXT>
 //    CAMERACONTEXT>
 //        BOARDCONTEXT>
+//            ENEMYCONTET/
 //            PLAYERCONTEXT>
 
 
@@ -22,9 +24,11 @@ root.render(
     <AppProvider>
       <CameraProvider>
         <BoardProvider>
+          <EnemyProvider>
           <PlayerProvider>
             <App />
           </PlayerProvider>
+          </EnemyProvider>
         </BoardProvider>
       </CameraProvider>
     </AppProvider>

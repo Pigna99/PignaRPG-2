@@ -58,24 +58,23 @@ code {
   transition: transform 0.3s;
 }
 
-.imgplayer{
-  transform: rotateX(90deg);
+.imgpropcontainer{
   position: absolute;
-  top: -130px;
   transform-origin: bottom;
   width: 100px;
-  
+  top:-250px;
+  left: 0;
+  height:300px;
   transform: rotateX(90deg) rotateY(270deg);
   transition: transform 0.3s;
 }
 
+.imgprop{
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
 
-.imgplayer1{
-  transform: rotateX(-90deg) rotateY(-45deg);
-}
-.imgplayer2{
-  transform: rotateX(-90deg) rotateY(25deg);
-}
 
 
 .imgplayertop{
@@ -256,6 +255,39 @@ code {
   background-color: rgba(255, 0, 0, 0.5);
 }
 
+.turnbox{
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: absolute;
+  width: 130px;
+  height: 280px;
+  background-color: rgb(12, 185, 208);
+  border: 2px solid white;
+  border-radius: 10px;
+  top: 200px;
+  right: 10px;
+  z-index: 5;
+  transition: all 0.3s;
+}
+
+.turn{
+  color: white;
+  position: absolute;
+  height: 30px;
+  width: 100%;
+  left: 130px;
+  border-radius: 5px;
+  padding-left: 5px;
+  border: 1px solid white;
+  background-color: rgb(12, 110, 208);
+  transition: all 0.3s;
+}
+
+.nextTurn{
+  position: relative;
+  top: 10px;
+}
 
 /* ANIMATIONS */
 

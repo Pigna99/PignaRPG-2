@@ -22,11 +22,11 @@ function Prop({img, xpos, ypos, className, onKeyDown, id, clickPropFunction}) {
         {
             !perspective ?
             <>
-                <img src={img} draggable={false} className="imgplayer"
+                <div className="imgpropcontainer"
                     style={{
                         transform: `rotateX(-90deg) rotateY(${rotationFull.z}deg)`,
                     }}
-                />
+                ><img src={img} draggable={false} className="imgprop"/></div>
                 <img src={shadowimg} draggable={false}/>
             </>
             :   <img src={img} draggable={false} className="imgplayertop"/>

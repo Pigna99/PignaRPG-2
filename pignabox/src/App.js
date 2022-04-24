@@ -1,8 +1,8 @@
-
-import Navigation from "./Components/Navigation";
 import Settings from "./Components/Settings";
 import BoardContainer from "./Components/BoardContainer";
 import MouseNav from "./Components/Camera/MouseNav";
+import Navigation from "./Components/Camera/Navigation";
+import TurnBox from "./Components/TurnBox";
 
 import { useGlobalContext } from "./context";
 import { useCameraContext, usePlayerContext } from "./contexts";
@@ -30,6 +30,7 @@ function App() {
       <Settings/>
       <div id="background" onClick={setPlayerWait}  onMouseDown={handleCameraMovement} onContextMenu={(e)=>e.preventDefault()}></div>
       <BoardContainer/>
+      <TurnBox/>
       <Navigation/>
       <MouseNav/>
     </div>

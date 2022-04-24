@@ -1,7 +1,7 @@
 import React from 'react'
 import {MdRotate90DegreesCcw} from 'react-icons/md'
 import {BiPlus, BiMinus} from 'react-icons/bi'
-import {useCameraContext} from "../contexts"
+import {useCameraContext} from "../../contexts"
 
 function Navigation() {
     const {rotateZ, handleZoom, isCameraMoving, cameraMovingStart} = useCameraContext()
