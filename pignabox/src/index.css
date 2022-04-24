@@ -1,0 +1,121 @@
+
+#root, html{
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(124, 228, 231);
+  height: 100%;
+}
+
+
+.App{
+  overflow: hidden;
+  height: 100%;
+}
+
+h4{
+  margin: 0;
+  text-align: center;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.box{
+  
+  background-color: gray;
+  width: 100px;
+  height: 100px;
+  border: 2px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 60px;
+}
+
+.prop{
+  transform-style:preserve-3d;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  font-size: 80px;
+  transition: all 0.3s;
+}
+
+.player{
+  background-color: rgba(247, 53, 53, 0.582);
+  border: 2px solid rgba(0, 0, 0, 0.11);
+}
+
+.imgplayer{
+  position: absolute;
+  top: -130px;
+  transform-origin: bottom;
+  width: 100px;
+}
+
+.imgplayer1{
+  transform: rotateX(-90deg) rotateY(-45deg);
+}
+.imgplayer2{
+  transform: rotateX(-90deg) rotateY(30deg);
+}
+
+.imgplayertop{
+  height: 100px;
+}
+
+.row{
+  display: flex;
+  
+}
+
+.board{
+  margin: 20px;
+  width: 624px;
+  transform-style:preserve-3d;
+  transition: all 0.3s;
+}
+
+.boardcontainer{
+  display: flex;
+  justify-content: center;
+  overflow:visible;
+}
+
+.App{
+  margin: 0px;
+}
+
+
+.side{
+  background-color: rgb(95, 95, 95);
+  border: 2px solid black;
+}
+
+.settingsbutton{
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  z-index: 4;
+  cursor: pointer;
+}
+
+.Settings{
+  margin-top: 10px;
+}
