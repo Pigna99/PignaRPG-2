@@ -2,7 +2,7 @@
 import Navigation from "./Components/Navigation";
 import Settings from "./Components/Settings";
 import BoardContainer from "./Components/BoardContainer";
-import MouseNav from "./Components/MouseNav";
+import MouseNav from "./Components/Camera/MouseNav";
 
 import { useGlobalContext } from "./context";
 import { useCameraContext, usePlayerContext } from "./contexts";

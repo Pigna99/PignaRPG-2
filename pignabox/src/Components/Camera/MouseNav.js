@@ -1,5 +1,5 @@
 import React from 'react'
-import {useCameraContext} from "../contexts"
+import {useCameraContext} from "../../contexts"
 
 function MouseNav() {
     const {isCameraMoving,cameraMovingStart, movingOffset} = useCameraContext()
