@@ -10,7 +10,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(124, 228, 231);
+  
   height: 100%;
 }
 
@@ -18,6 +18,7 @@ body {
 .App{
   overflow: hidden;
   height: 100%;
+  background-color: rgb(124, 228, 231);
 }
 
 h4{
@@ -30,8 +31,8 @@ code {
     monospace;
 }
 
+
 .box{
-  
   background-color: gray;
   width: 100px;
   height: 100px;
@@ -39,45 +40,96 @@ code {
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
   font-size: 60px;
 }
 
 .prop{
   transform-style:preserve-3d;
-  display: flex;
   position: absolute;
-  top: 0;
-  left: 0;
-  justify-content: center;
-  align-items: center;
   width: 100px;
   height: 100px;
-  font-size: 80px;
   transition: all 0.3s;
 }
 
 .player{
-  background-color: rgba(247, 53, 53, 0.582);
-  border: 2px solid rgba(0, 0, 0, 0.11);
+  border: 0px solid rgba(0, 0, 0, 0.11);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.3s;
 }
 
 .imgplayer{
+  transform: rotateX(90deg);
   position: absolute;
   top: -130px;
   transform-origin: bottom;
   width: 100px;
+  
+  transform: rotateX(90deg) rotateY(270deg);
+  transition: transform 0.3s;
 }
+
 
 .imgplayer1{
   transform: rotateX(-90deg) rotateY(-45deg);
 }
 .imgplayer2{
-  transform: rotateX(-90deg) rotateY(30deg);
+  transform: rotateX(-90deg) rotateY(25deg);
 }
+
 
 .imgplayertop{
   height: 100px;
+}
+
+.tree:hover > .imgplayer1{
+  opacity: 0.6;
+  transition: all 0.3s;
+}
+
+.tree:hover > .imgplayer2{
+  opacity: 0.2;
+  transition: all 0.3s;
+}
+
+
+
+.tree {
+  pointer-events: none;
+}
+
+.triangle{
+  position: absolute;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 40px solid rgba(255, 0, 0, 1);
+  transform-origin: center;
+}
+
+.triangle1{
+  transform: rotateX(90deg) rotateY(30deg);
+}
+
+.triangle2{
+  transform: rotateX(90deg) rotateY(60deg);
+}
+
+.circle{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgb(169, 12, 12);
+  transform: translateZ(21px);
+}
+
+.flatpointer{
+  position: relative;
+  top: 40px;
+  width: 80px;
+  height: 20px;
+  border-radius: 90% 90% 10% 10% ;
+  background-color: rgb(208, 22, 22);
+  
 }
 
 .row{
@@ -86,16 +138,35 @@ code {
 }
 
 .board{
+  position: absolute;
   margin: 20px;
   width: 624px;
   transform-style:preserve-3d;
   transition: all 0.3s;
+  pointer-events:all;
 }
 
 .boardcontainer{
+  height: fill;
+  width: 100%;
+  top:0;left: 0;
   display: flex;
+  position: absolute;
   justify-content: center;
   overflow:visible;
+  user-select: none;
+  z-index: 1!important;
+  pointer-events: none;
+
+}
+
+#background{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
 }
 
 .App{
@@ -118,4 +189,78 @@ code {
 
 .Settings{
   margin-top: 10px;
+}
+
+#pointer{
+  animation-duration: 0.8s;
+  animation-play-state: running;
+  animation-iteration-count: infinite;
+}
+
+.navigation{
+  display: flex;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-color: rgb(12, 185, 208);
+  border: 2px solid white;
+  border-radius: 50%;
+  top: 10px;
+  right: 10px;
+  transform-origin: top right;
+  transform: scale(1.5);
+  z-index: 5;
+}
+
+.navico{
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.navico:hover{
+  color: blue;
+  
+}
+
+.rotateright{
+  top:35px;
+  left:10px;
+  transform: scaleX(-1) scaleY(-1) rotate(0deg);
+}
+
+.rotateleft{
+  top:35px;
+  right:10px;
+  transform: scaleY(-1) rotate(0deg);
+}
+
+.zoomin{
+  top:10px;
+  left:35px;
+}
+
+.zoomout{
+  bottom:10px;
+  left:35px;
+}
+
+.reachable{
+  position: absolute;
+  width: 100px;
+  height: 100px;
+
+  background-color: rgba(255, 0, 0, 0.5);
+}
+
+
+/* ANIMATIONS */
+
+@keyframes pointer_ready {
+  0%{transform:translateZ(230px) scale(0.5)}
+  50%{transform:translateZ(220px) scale(0.5)}
+  100%{transform:translateZ(230px) scale(0.5)}
 }

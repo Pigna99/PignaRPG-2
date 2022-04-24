@@ -1,6 +1,6 @@
 import React from 'react'
 import { useGlobalContext } from '../context'
-import Prop from './Prop'
+import {useCameraContext, usePlayerContext} from "../contexts"
 
 import plain from '../img/plain.png'
 import sand from '../img/sand.png'
@@ -14,9 +14,11 @@ import plaintree from '../img/plaintree.png'
 //4 - tree
 
 function Box({children, xindex, yindex, value}) {
-    const {handleClick, DEBUG, perspective} = useGlobalContext()
+    const {DEBUG} = useGlobalContext()
+    const {perspective} = useCameraContext()
+    const {handleClick, playerStatus, movementMatrix} = usePlayerContext()
   return (
-    <div className='box' id={xindex+"-"+yindex} onClick={()=>handleClick(xindex, yindex)}
+    <div className='box' id={xindex+"-"+yindex} onClick={()=>(movementMatrix[yindex][xindex]>0 ? handleClick(xindex, yindex):"")}
       style={{backgroundImage:`url(${
         value ==1 ? plain :
         value ==2 ? sand :
@@ -24,9 +26,17 @@ function Box({children, xindex, yindex, value}) {
         value ==4 && !perspective ? plaintree :
         value ==4 && perspective ? plain :
         ""
-      })`}}
+      })`,
+      cursor: (movementMatrix[yindex][xindex]>0 && playerStatus=== "READY" ? "pointer" : "default")
+    }}
     >
       {DEBUG ? value : ""}
+      {children}
+      {
+        movementMatrix[yindex][xindex]>0 && playerStatus=="READY"? 
+        <div className='reachable'/>
+        : ""
+      }
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import Player from "./Player";
 import Box from './Box'
 import { useGlobalContext } from '../context'
+import { useBoardContext, useCameraContext } from "../contexts";
 import Side from "./Side";
 import Prop from "./Prop";
 
@@ -10,7 +11,9 @@ import tree from '../img/tree.png'
 
 
 function Board() {
-    const {matrix, N, M, rotationFull} = useGlobalContext()
+    const {N, M} = useGlobalContext()
+    const {rotationFull} = useCameraContext()
+    const {matrix} = useBoardContext()
     
     //console.log(matrix)
     
@@ -22,13 +25,13 @@ function Board() {
             width: (N*104)
         }}
         >
-        {matrix.map((row, i)=>{
+        {matrix.map((row, i)=>{//row
             return(
                 <div className='row' key={"row-"+i}>
                     {
-                        row.map((el, j)=>{
+                        row.map((el, j)=>{//column
                             return(
-                                <Box xindex={i} yindex={j} key={i+"-"+j} value={el}></Box>
+                                <Box xindex={j} yindex={i} key={j+"-"+i} value={el}></Box>
                             )
                         })
                     }
@@ -41,7 +44,7 @@ function Board() {
         {
             matrix.map((row,i)=>row.map((el,j)=>{
                 if(el==4){
-                    return <Prop xpos={j} ypos={i} img={tree} key={`tree-${j}-${i}`}/>
+                    return <Prop xpos={j} ypos={i} img={tree} key={`tree-${j}-${i}`} id={`tree-${j}-${i}`} className={"tree"}/>
                 }
             }))
         }

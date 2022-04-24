@@ -1,26 +1,37 @@
-import Player from "./Components/Player";
+
+import Navigation from "./Components/Navigation";
 import Settings from "./Components/Settings";
-import Board from "./Components/Board";
+import BoardContainer from "./Components/BoardContainer";
+import MouseNav from "./Components/MouseNav";
+
 import { useGlobalContext } from "./context";
+import { useCameraContext, usePlayerContext } from "./contexts";
+import {setMouse} from "./utils"
 
 import {AiFillSetting} from 'react-icons/ai'
 
 function App() {
-  const {scaling, zindex, isSettings, toggleSettings} = useGlobalContext()
+  const {toggleSettings} = useGlobalContext()
+
+  const {handleCameraMovement,handleCameraStop,
+    handleCamera, isCameraMoving,
+    movingOffset} = useCameraContext();
+
+  const {setPlayerWait} = usePlayerContext();
+
 
   return (
-    <div className="App" >
+    <div className="App" onMouseUp={handleCameraStop} onMouseLeave={handleCameraStop} onMouseMove={(e)=>isCameraMoving ? handleCamera(e) : ""}
+      style={{//camera moving cursor
+        cursor:(isCameraMoving? setMouse(movingOffset[0], movingOffset[1]) : "")
+      }}
+    >
       <AiFillSetting className="settingsbutton" onClick={toggleSettings}/>
-      {
-        isSettings? <Settings/> : ""
-      }
-      <div className="boardcontainer" style={{perspective:2600, transform:`scale(${scaling/50})`, zIndex:1, position:"relative",
-        top:`${zindex}px`,
-        transition: "all 0.1s linear"
-        }}>
-        <Board/>
-      </div>
-      
+      <Settings/>
+      <div id="background" onClick={setPlayerWait}  onMouseDown={handleCameraMovement} onContextMenu={(e)=>e.preventDefault()}></div>
+      <BoardContainer/>
+      <Navigation/>
+      <MouseNav/>
     </div>
   );
 }
