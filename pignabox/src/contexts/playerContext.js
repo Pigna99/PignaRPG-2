@@ -19,7 +19,7 @@ const PlayerProvider = ({children})=>{
 
     //player
     const [player, setPlayer] = useState(playerInit) //player position
-    const [playerMovement, setPlayerMovement] = useState(MOVEMENT)
+    const [playerMovement, setPlayerMovement] = useState(0)
 
     const [playerStatus, setPlayerStatus] = useState("WAIT") //player status
 
@@ -111,9 +111,13 @@ const PlayerProvider = ({children})=>{
 
 
     useEffect(()=>{
+        setPlayerMovement(MOVEMENT)
+    },[])
+
+    useEffect(()=>{
         if(playerStatus==="READY"){
             
-           let initmovementMatrix = generateMovementMatrix(N,M,matrix, entitiesMatrix, player, MOVEMENT);
+           let initmovementMatrix = generateMovementMatrix(N,M,matrix, entitiesMatrix, player, playerMovement);
             //console.log(initmovementMatrix)
             //setMovementMatrix(generateMovementMatrix(N,M,matrix, player, MOVEMENT));
             setMovementMatrix(initmovementMatrix);

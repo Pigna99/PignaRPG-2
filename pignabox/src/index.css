@@ -67,12 +67,14 @@ code {
   height:300px;
   transform: rotateX(90deg) rotateY(270deg);
   transition: transform 0.3s;
+  pointer-events: none;
 }
 
 .imgprop{
   position: absolute;
   width: 100%;
   bottom: 0;
+  pointer-events:all;
 }
 
 
