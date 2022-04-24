@@ -61,7 +61,7 @@ const BoardProvider = ({children})=>{
     useEffect(()=>{
         //console.log(prioEntities)
         //console.log(prioQueue)
-        console.log(entitiesMatrix)
+        //console.log(entitiesMatrix)
     },[prioEntities, entitiesMatrix])
 
     

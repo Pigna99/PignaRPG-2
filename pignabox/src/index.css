@@ -51,6 +51,8 @@ code {
   transition: all 0.3s;
 }
 
+
+
 .player{
   border: 0px solid rgba(0, 0, 0, 0.11);
   border-radius: 50%;
@@ -68,6 +70,30 @@ code {
   transform: rotateX(90deg) rotateY(270deg);
   transition: transform 0.3s;
   pointer-events: none;
+}
+
+.info{
+  position: absolute;
+  width: 100%;
+  background-color: rgba(19, 190, 150, 0.72);
+  text-align: center;
+  border: 2px solid white;
+  border-radius: 20px;
+  bottom: 130px;
+  height:30px;
+  opacity: 0;
+  transition: all 0.3s;
+  pointer-events: all;
+}
+
+.enemy{
+  pointer-events: all!important;
+  cursor: pointer;
+}
+
+.imgpropcontainer:hover > .info{
+  opacity: 1!important;
+  transition: all 0.3s;
 }
 
 .imgprop{
@@ -96,7 +122,7 @@ code {
 
 
 .tree {
-  pointer-events: none;
+  pointer-events: none!important;
 }
 
 .triangle{

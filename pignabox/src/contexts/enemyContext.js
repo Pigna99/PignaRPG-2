@@ -18,14 +18,14 @@ const EnemyProvider = ({children})=>{//for all enemies!
                 let pos = getEnemyPos(N,M, matrix, entitiesMatrix, enemy_pos);
                 //console.log(entitiesMatrix)
                 //enemies in the same position
-                enemy_pos.push({xpos:pos.y,ypos:pos.x, id:element.id, type_id:element.type_id})
+                enemy_pos.push({name:element.name, xpos:pos.y,ypos:pos.x, id:element.id, type_id:element.type_id})
             }
         });
         setEnemies(enemy_pos);
     },[entities])
 
     useEffect(()=>{
-        console.log(enemies)
+        //console.log(enemies)
         enemies.forEach(el=>{
             setEntity(el.xpos, el.ypos, el.id)
         })

@@ -17,7 +17,9 @@ function Enemy() {
           xpos={el.xpos} ypos={el.ypos}
           id = {`enemy-${el.id}-${el.xpos}-${el.ypos}`}
           key = {`enemy-${el.id}-${el.xpos}-${el.ypos}`}
-        />)
+        >
+          <div className='info'>{el.name}</div>
+        </Prop>)
       })
     }
     

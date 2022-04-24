@@ -3,13 +3,13 @@ import {useCameraContext} from "../contexts"
 import shadowimg from '../img/shadow.png'
 const DIM= 104;
 
-function Prop({img, xpos, ypos, className, onKeyDown, id, clickPropFunction}) {
+function Prop({img, xpos, ypos, className, onKeyDown, id, clickPropFunction, children}) {
     const {perspective, rotationFull} = useCameraContext()
   return (
     <div 
         onKeyDown={onKeyDown}
         tabIndex={0}
-        className={"prop "+ className}
+        className="prop"
         id={id}
         onClick={clickPropFunction}
         style={{
@@ -26,7 +26,8 @@ function Prop({img, xpos, ypos, className, onKeyDown, id, clickPropFunction}) {
                     style={{
                         transform: `rotateX(-90deg) rotateY(${rotationFull.z}deg)`,
                     }}
-                ><img src={img} draggable={false} className="imgprop"/></div>
+                ><img src={img} draggable={false} className={"imgprop " + className}/>
+                {children}</div>
                 <img src={shadowimg} draggable={false}/>
             </>
             :   <img src={img} draggable={false} className="imgplayertop"/>

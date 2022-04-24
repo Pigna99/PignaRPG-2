@@ -47,14 +47,14 @@ const PlayerProvider = ({children})=>{
     const handleClick= (x,y)=>{
         //console.log(x,y)
         if(isTraversable(x,y) && playerStatus==="READY"){
-            console.log(movementMatrix[y][x]-1)
+            //console.log(movementMatrix[y][x]-1)
             setPlayerMovement(movementMatrix[y][x]-1)
             setEntity(player.xpos, player.ypos, -1)
             setPlayer({xpos:x,ypos:y,})
         }
     }
 
-    const move= (e)=>{
+    const move= (e)=>{ //BROKEN
         //console.log(e.key)
         if(playerStatus==="READY" && playerMovement>0){
         switch (e.key) {
@@ -130,7 +130,7 @@ const PlayerProvider = ({children})=>{
             setMovementMatrix(generateMovementMatrix(N,M,matrix, entitiesMatrix, player, playerMovement));
         }
 
-        console.log(player)
+        //console.log(player)
         setEntity(player.xpos, player.ypos, 0);
     },[player])
 
