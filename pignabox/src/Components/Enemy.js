@@ -1,10 +1,12 @@
 import React from 'react'
 import Prop from './Prop'
 
-import { useBoardContext } from '../contexts'
+import { useBoardContext, useCameraContext } from '../contexts'
 
 function Enemy() {
   const {entities} = useBoardContext()
+  const {rotationFull} = useCameraContext()
+  console.log(rotationFull)
   return (
     <>
     {
@@ -19,7 +21,11 @@ function Enemy() {
           type_id={el.type_id}
           entity_id={el.id}
         >
-          <div className='info'>{el.name}</div>
+          <div className='info' 
+          style={{
+            transform:`rotateX(${rotationFull.x}deg)`
+            
+            }}>{el.name}</div>
         </Prop>)
       })
     }

@@ -7,14 +7,11 @@ import Side from "./Side";
 import Prop from "./Prop";
 import Enemy from "./Enemy";
 
-import tree from '../img/tree.png'
-
-
 
 
 function Board() {
     const {N, M} = useGlobalContext()
-    const {rotationFull} = useCameraContext()
+    const {rotationFull, firstAnimation} = useCameraContext()
     const {matrix} = useBoardContext()
     
     //console.log(matrix)
@@ -24,7 +21,8 @@ function Board() {
         style={{
             //transform: `rotate3d(3, 1, -2, ${rotation}deg)`,
             transform: `rotateX(${rotationFull.x}deg) rotateY(${rotationFull.y}deg) rotateZ(${rotationFull.z}deg)`,
-            width: (N*104)
+            transition: firstAnimation ? "all 3s" : "all 0.3s",
+            width: (N*104),
         }}
         >
         {matrix ? matrix.map((row, i)=>{//row

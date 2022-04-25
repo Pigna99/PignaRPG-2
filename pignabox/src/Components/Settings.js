@@ -1,6 +1,6 @@
 import React from 'react'
-import { useGlobalContext } from "../context";
-import {useBoardContext, useCameraContext} from "../contexts"
+import {useGlobalContext } from "../context";
+import {useCameraContext} from "../contexts"
 
 
 function SettingsWrapped() {
@@ -8,7 +8,7 @@ function SettingsWrapped() {
         rotationFull, handleRotationFullX,handleRotationFullY,handleRotationFullZ,
         zindex, handleZindex, setFullScreen
       } = useCameraContext()
-    const {setNextTurn} = useBoardContext()
+    
     
   return (
     <div className="Settings" style={{display:"flex", flexFlow:"column", width:"200px", zIndex:3, position:"absolute"}}>
@@ -23,7 +23,7 @@ function SettingsWrapped() {
         <button onClick={setPerspectiveNormal}>normal</button>
         <button onClick={setPerspectiveReverse}>reverse</button>
         <button onClick={setFullScreen}>FullScreen</button>
-        <button onClick={setNextTurn}>next turn</button>
+        
     </div>
   )
 }

@@ -1,14 +1,14 @@
 import {React, useState, useEffect, createContext, useContext} from 'react'
 
-
-const START_ROTATION = {x:60,y:0,z:310}
+const NO_ROTATION = {x:70,y:0,z:0}
+const START_ROTATION = {x:50,y:0,z:310}
 
 
 const CameraContext = createContext()
 const CameraProvider = ({children})=>{
     //rotation
     const [scaling, setScaling] =useState(50);
-    const [rotationFull, setRotationFull] = useState(START_ROTATION)
+    const [rotationFull, setRotationFull] = useState(NO_ROTATION)
     const [zindex, setZindex] = useState(0);
     const [perspective, setPerspective] =useState(false);
     //mov
@@ -18,6 +18,10 @@ const CameraProvider = ({children})=>{
     const [movingOffset, setMovingOffset] = useState([0,0])
     const [movingAxes, setMovingAxes] = useState([0,0])
     //mov
+
+    //animation
+    const [firstAnimation, setFirstAnimation] = useState(true)
+    //animation
 
     const handleZoom= (type) =>{
         if(type === "in" && scaling<100){
@@ -41,7 +45,7 @@ const CameraProvider = ({children})=>{
     }
 
     const setPerspectiveNormal= ()=>{
-        setRotationFull({x:60,y:0,z:310});
+        setRotationFull(START_ROTATION);
         //setPerspective(false);
     }
 
@@ -143,12 +147,24 @@ const CameraProvider = ({children})=>{
         }
     },[movingOffset, isCameraMoving])
 
+    useEffect(()=>{
+        
+        setTimeout(()=>{
+            setRotationFull(START_ROTATION)
+            
+        },1)
+        setTimeout(()=>{
+            setFirstAnimation(false)
+        },100)
+    }, [])
+
     return <CameraContext.Provider value={{
         setPerspectiveUp, perspective, setPerspectiveNormal,
         scaling, handleScaling, rotationFull, handleRotationFullX,handleRotationFullY,handleRotationFullZ,
         setPerspectiveReverse,handleZindex, zindex, setFullScreen,
         rotateZ, handleZoom, handleCameraMovement, handleCameraStop,
-        handleCamera, isCameraMoving, movingAxes, cameraMovingStart, movingOffset
+        handleCamera, isCameraMoving, movingAxes, cameraMovingStart, movingOffset,
+        firstAnimation
     }}>
         {children}
     </CameraContext.Provider>

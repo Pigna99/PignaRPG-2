@@ -63,6 +63,7 @@ function Prop({xpos, ypos, className, onKeyDown, id, clickPropFunction, children
                 <div className="imgpropcontainer"
                     style={{
                         transform: `rotateX(-90deg) rotateY(${rotationFull.z}deg)`,
+                        transformStyle:"preserve-3d"
                     }}
                 ><img src={img} draggable={false} className={"imgprop " + className}/>
                 {children}</div>

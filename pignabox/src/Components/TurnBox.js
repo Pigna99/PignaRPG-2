@@ -3,7 +3,7 @@ import { useBoardContext } from '../contexts'
 import { DEBUG } from '../CONSTANTS';
 
 function TurnBox() {
-    const {prioQueue} = useBoardContext()
+    const {prioQueue,setNextTurn} = useBoardContext()
     const first_queue= prioQueue.length!= 0 ? prioQueue[0].position : 0;
     const last_queue = prioQueue.length!= 0 ? prioQueue[9].position : 0;
     const normalize = (pos, displ)=>{
@@ -11,6 +11,7 @@ function TurnBox() {
     }
 
   return (
+    <>
     <div className='turnbox'>
         {
             prioQueue? 
@@ -23,6 +24,13 @@ function TurnBox() {
             :""
         }
     </div>
+    <button onClick={setNextTurn} style={{
+        position:"absolute",
+        top: 490,
+        right: 40,
+        zIndex:5
+    }}>next turn</button>
+    </>
   )
 }
 
