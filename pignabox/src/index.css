@@ -55,7 +55,6 @@ code {
 
 .player{
   border: 0px solid rgba(0, 0, 0, 0.11);
-  border-radius: 50%;
   cursor: pointer;
   transition: transform 0.3s;
 }
@@ -68,7 +67,7 @@ code {
   left: 0;
   height:300px;
   transform: rotateX(90deg) rotateY(270deg);
-  transition: transform 0.3s;
+  transition: all 0.3s;
   pointer-events: none;
 }
 
@@ -107,6 +106,7 @@ code {
 
 .imgplayertop{
   height: 100px;
+  transition: all 0.3s;
 }
 
 .tree:hover > .imgplayer1{
@@ -129,23 +129,15 @@ code {
   position: absolute;
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
-  border-bottom: 40px solid rgba(255, 0, 0, 1);
+  border-bottom: 40px solid blue;
   transform-origin: center;
-}
-
-.triangle1{
-  transform: rotateX(90deg) rotateY(30deg);
-}
-
-.triangle2{
-  transform: rotateX(90deg) rotateY(60deg);
 }
 
 .circle{
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: rgb(169, 12, 12);
+  background-color: rgb(0, 0, 134);
   transform: translateZ(21px);
 }
 
@@ -307,7 +299,7 @@ code {
   left: 130px;
   border-radius: 5px;
   padding-left: 5px;
-  border: 1px solid white;
+  border: 1px solid rgb(255, 255, 255);
   background-color: rgb(12, 110, 208);
   transition: all 0.3s;
 }

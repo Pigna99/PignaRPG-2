@@ -175,7 +175,7 @@ const generatePrioQueue = (entities, prioLength)=>{
             }
         }
         //turn is the next to insert to queue and increment
-        queue.push({id: entities[turn].id, name:entities[turn].name, position: entities[turn].position, speed_prio: entities[turn].speed_prio})
+        queue.push({id: entities[turn].id, name:entities[turn].name, position: entities[turn].position, speed_prio: entities[turn].speed_prio, team: entities[turn].team})
         prioEntities.forEach((el,index)=>{
             if(el.id === entities[turn].id){
                 prioEntities[index].last_position = entities[turn].position;
@@ -250,4 +250,22 @@ const seeForOldEnemies = ( oldenemies, x, y)=>{
     return exit
 }
 
-export {newMatrix, generateContinent, generateMovementMatrix, setMouse, generatePrioQueue, nextTurn, getEnemyPos}
+
+const generateEntitiesMatrix = (N , M, entities, matrix)=>{
+    let initmatrix = newMatrix(N,M, -1);
+    //console.log(entities,matrix, initmatrix)
+    entities.forEach((entity, index)=>{
+        let x=0; let y=0;
+        do{
+            x= randomNumber(N);
+            y= randomNumber(M);
+        }while((matrix[x][y]=== 3 || matrix[x][y]=== 4) || initmatrix[x][y]!=-1)
+        initmatrix[x][y]=entity.id;
+        entities[index].xpos = y;
+        entities[index].ypos = x;
+    })
+    //console.log(initmatrix)
+    return [initmatrix, entities]
+}
+
+export {newMatrix, generateContinent, generateMovementMatrix, setMouse, generatePrioQueue, nextTurn, getEnemyPos, generateEntitiesMatrix}

@@ -1,4 +1,5 @@
 import Player from "./Player";
+import Pointer from "./Pointer";
 import Box from './Box'
 import { useGlobalContext } from '../context'
 import { useBoardContext, useCameraContext } from "../contexts";
@@ -26,7 +27,7 @@ function Board() {
             width: (N*104)
         }}
         >
-        {matrix.map((row, i)=>{//row
+        {matrix ? matrix.map((row, i)=>{//row
             return(
                 <div className='row' key={"row-"+i}>
                     {
@@ -39,16 +40,18 @@ function Board() {
                 
                 </div>
                 )
-        })}
+        }):""}
 
         <Player/>
+        <Pointer/>
         <Enemy/>
         {
+            matrix ?
             matrix.map((row,i)=>row.map((el,j)=>{
                 if(el==4){
-                    return <Prop xpos={j} ypos={i} img={tree} key={`tree-${j}-${i}`} id={`tree-${j}-${i}`} className={"tree"}/>
+                    return <Prop xpos={j} ypos={i} type_id={2} key={`tree-${j}-${i}`} id={`tree-${j}-${i}`} className={"tree"}/>
                 }
-            }))
+            })):""
         }
 
         <Side side="bottom"/>

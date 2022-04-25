@@ -18,7 +18,7 @@ function TurnBox() {
             name={el.name} id={el.id} 
             displacement={normalize(el.position-first_queue, last_queue-first_queue)}
             key={`${el.id}-${el.position}`}
-            row={index}
+            row={index} team={el.team}
             />)
             :""
         }
@@ -26,14 +26,17 @@ function TurnBox() {
   )
 }
 
-function Turn({name, id , displacement, row}) {
+function Turn({name, id , displacement, row, team}) {
 
     return(
         <div className='turn'
             style={{
                 left:displacement/5,
                 top:row*31,
-                backgroundColor:row === 0 ? "red" : `rgb(10, ${180-displacement/2}, 80)`,
+                backgroundColor:`rgb(${team==="a" ? 0 : 255}, ${20+displacement/2}, ${team==="a" ? 255 : 0})`,
+                color: row===0 ? "yellow" : "white",
+                fontSize: row===0 ? 20 : "",
+                paddingTop:"0px"
             }}
         >{DEBUG ? `${id}- ${displacement} ` : name}</div>
     )

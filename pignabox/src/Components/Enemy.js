@@ -1,22 +1,23 @@
 import React from 'react'
 import Prop from './Prop'
-import frog from '../img/frog.png'
 
-import { useEnemyContext } from '../contexts'
+import { useBoardContext } from '../contexts'
 
 function Enemy() {
-  const {enemies} = useEnemyContext()
-  //console.log(enemies)
+  const {entities} = useBoardContext()
   return (
     <>
     {
-      enemies.map((el, index)=>{
+      entities.map((el, index)=>{
+        if(el.team==="a"){return}
         return(
         <Prop className={'enemy'} 
-          tabIndex={0} img={frog}  
+          tabIndex={0}
           xpos={el.xpos} ypos={el.ypos}
-          id = {`enemy-${el.id}-${el.xpos}-${el.ypos}`}
-          key = {`enemy-${el.id}-${el.xpos}-${el.ypos}`}
+          id = {`enemy-${el.id}`}
+          key = {`enemy-${el.id}`}
+          type_id={el.type_id}
+          entity_id={el.id}
         >
           <div className='info'>{el.name}</div>
         </Prop>)
