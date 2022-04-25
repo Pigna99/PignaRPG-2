@@ -53,7 +53,7 @@ function Prop({xpos, ypos, className, onKeyDown, id, clickPropFunction, children
             position:"absolute",
             width:"90%", height:"90%", 
             backgroundColor:(activeEntity.team === "a" ? "rgb(0, 0, 255, 0.7)" : "rgb(255, 0, 0, 0.7)"),
-            borderRadius:"50%", zIndex:-1,
+            borderRadius:"50%", zIndex:-2,
             border:"2px solid white", opacity: (activeEntity.id === entity_id ? 0.7 : 0),
             transition:"all 0.3s"
         }}/>

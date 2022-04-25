@@ -107,6 +107,7 @@ code {
 .imgplayertop{
   height: 100px;
   transition: all 0.3s;
+  cursor: pointer;
 }
 
 .tree:hover > .imgplayer1{
@@ -142,13 +143,13 @@ code {
 }
 
 .flatpointer{
-  position: relative;
-  top: 40px;
-  width: 80px;
-  height: 20px;
-  border-radius: 90% 90% 10% 10% ;
-  background-color: rgb(208, 22, 22);
-  
+  position: absolute;
+  top: 2px;
+  width: 93px;
+  height: 93px;
+  border-radius: 50%;
+  border: 4px solid red;
+  cursor: pointer;
 }
 
 .row{
