@@ -6,7 +6,6 @@ import { useBoardContext, useCameraContext } from '../contexts'
 function Enemy() {
   const {entities} = useBoardContext()
   const {rotationFull} = useCameraContext()
-  console.log(rotationFull)
   return (
     <>
     {
