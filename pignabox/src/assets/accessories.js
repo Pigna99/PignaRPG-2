@@ -1,4 +1,15 @@
-class Accessory { //some stats (see also weakness)
+class Weakness{
+    constructor(fire,water,ice,air,slow,blind,mute,poison){
+        this.elements={
+            fire: fire, water: water, ice: ice, air: air
+        }
+        this.status={
+            slow: slow, blind: blind, mute: mute, poison: poison,
+    }
+    }        
+};
+
+class Accessory{ //some stats (see also weakness)
     constructor(name){
         this.name = name;
         this.strenght = 0;
@@ -9,7 +20,7 @@ class Accessory { //some stats (see also weakness)
         this.speed = 0;
         this.fortune = 0;
         this.movement = 0;
-        this.weakness = {}
+        this.weakness = new Weakness(0,0,0,0,0,0,0,0)
     }    
 }
 

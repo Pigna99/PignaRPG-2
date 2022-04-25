@@ -20,4 +20,4 @@ const listWeapons =
 ];
 
 
-export {weapons}
+export {listWeapons}
