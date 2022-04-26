@@ -1,13 +1,4 @@
-class Weakness{
-    constructor(fire,water,ice,air,slow,blind,mute,poison){
-        this.elements={
-            fire: fire, water: water, ice: ice, air: air
-        }
-        this.status={
-            slow: slow, blind: blind, mute: mute, poison: poison,
-    }
-    }        
-};
+import { Weakness } from "./classes";
 
 class Enemy{
     constructor(name, type_id, experience_given, hp, strenght, constitution, intelligence, speed, fortune, movement, weakness, abilities_enemy){
@@ -27,7 +18,7 @@ class Enemy{
             movement:movement,
         }
         //resistence of status and elements
-        this.weakness = weakness,
+        this.weakness = weakness;
         this.abilities_enemy = abilities_enemy;
     }
 }
@@ -36,7 +27,7 @@ class Enemy{
 const listEnemies = 
 [
     {//0 
-        ...new Enemy("Frog", 0, 100, 100, 10, 10, 10, 10, 10, 3, new Weakness(0,0,0,0,0,0,0,0), [])
+        ...new Enemy("Frog", 0, 100, 100, 10, 10, 10, 10, 10, 3, new Weakness(1,1,1,1,1,1,1,1), [])
     }
 ]
 

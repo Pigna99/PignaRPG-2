@@ -1,3 +1,4 @@
+import { Weakness } from "./classes";
 class Ally{
     constructor(name, type_id, hp, mp, strenght, constitution, intelligence, speed, fortune, abilities, spells){
         this.name= name;
@@ -17,11 +18,12 @@ class Ally{
         }
         this.equip =
         {//save with ID
-            weapon:0,
-            armor:0,
-            acc1:0,
-            acc2:0,
+            weapon:1,
+            armor:1,
+            acc1:1,
+            acc2:2,
         };
+        this.weakness = new Weakness(1,1,1,1,1,1,1,1)
         //resistence of status and elements non present in non battle
         this.abilities=abilities; //save with ID (pos in array)
         this.spells=spells;

@@ -1,10 +1,19 @@
+import { Weakness } from "./classes";
+
 class Weapon{
-    constructor(name, type, strenght){
+    constructor(name, type, strenght, speed){
         this.name = name;
         this.type = type;
         this.strenght = strenght;
-        this.accuracy = 255; //it always hit
-        this.speed = 0;//speed malus/bonus?
+        this.accuracy = 255;
+        this.constitution = 0;
+        this.hp = 0;
+        this.mp = 0;
+        this.intelligence = 0;
+        this.speed = speed;
+        this.fortune = 0;
+        this.movement = 0;
+        this.weakness = new Weakness(1,1,1,1,1,1,1,1)//different way to set weakness?
     }
 }
 
@@ -12,10 +21,10 @@ class Weapon{
 const listWeapons = 
 [
     {//0
-        ...new Weapon("none", "sword", 0) //hands like sword!
+        ...new Weapon("none", "sword", 0, 0) //hands like sword!
     },
     {//1
-        ...new Weapon("Stick", "sword", 3) //accuracy?
+        ...new Weapon("Stick", "sword", 5, 0) //accuracy?
     }
 ];
 

@@ -2,7 +2,7 @@ import { createContext, useContext} from "react";
 import {React, useState, useEffect} from 'react'
 import {generateCombatEntities } from "./utilsCombat";
 
-import { listAllies, listEnemies } from "./assets";
+import { listAllies } from "./assets";
 import {DEBUG, N, M} from './CONSTANTS'
 
 
@@ -29,7 +29,7 @@ const AppProvider = ({children})=>{
     }
 
     useEffect(()=>{
-        generateCombatEntities(listAllies, listEnemies)
+        generateCombatEntities(listAllies, [0,0,0])
     },[])
 
     return <AppContext.Provider value={{

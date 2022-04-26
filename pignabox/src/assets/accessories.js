@@ -1,14 +1,4 @@
-class Weakness{
-    constructor(fire,water,ice,air,slow,blind,mute,poison){
-        this.elements={
-            fire: fire, water: water, ice: ice, air: air
-        }
-        this.status={
-            slow: slow, blind: blind, mute: mute, poison: poison,
-    }
-    }        
-};
-
+import { Weakness } from "./classes";
 class Accessory{ //some stats (see also weakness)
     constructor(name){
         this.name = name;
@@ -20,7 +10,7 @@ class Accessory{ //some stats (see also weakness)
         this.speed = 0;
         this.fortune = 0;
         this.movement = 0;
-        this.weakness = new Weakness(0,0,0,0,0,0,0,0)
+        this.weakness = new Weakness(1,1,1,1,1,1,1,1)//different way to set weakness?
     }    
 }
 
@@ -32,6 +22,9 @@ const listAccessories =
     },
     {//1
         ...(new Accessory("Wooden Ring")), strenght: 3,
+    },
+    {//2
+        ...(new Accessory("Fire Ring")), weakness:new Weakness(0.5,1,1,1,1,1,1,1)
     },
 ];
 
