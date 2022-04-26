@@ -5,7 +5,7 @@ class Weakness{
         }
         this.status={
             slow: slow, blind: blind, mute: mute, poison: poison,
-    }
+        }
     }        
 };
 //elements:

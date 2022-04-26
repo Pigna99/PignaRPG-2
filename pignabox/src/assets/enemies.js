@@ -20,6 +20,7 @@ class Enemy{
         //resistence of status and elements
         this.weakness = weakness;
         this.abilities_enemy = abilities_enemy;
+        //accuracy of an enemy? NO: accuracy is in the abilities (attacks and other)
     }
 }
 

@@ -11,7 +11,7 @@ class combatEntity{
             ...oldstats.stats,
             hp_max:oldstats.stats.hp,
             mp_max:oldstats.stats.mp,
-            down:0,//to see if the ally is alive
+            down:false,//to see if the ally is alive
             //for enemies, they will just be removed from the array of entities
         }
         this.accuracy= accuracy;
@@ -42,6 +42,11 @@ const generateCombatEntities = (allies, enemies)=>{
     });
 
     //enemies! Just an array with the ids of the enemies
+    enemies.forEach((element)=>{
+        let entity =  new combatEntity(element, num_entities, "b", "none",255); //typeof weapon not necessary, accuracy not necessary
+        entitiesBattle.push(entity);
+        num_entities++;
+    })
 
     console.log(entitiesBattle)
     return entitiesBattle;
