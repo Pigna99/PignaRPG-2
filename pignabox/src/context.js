@@ -19,7 +19,7 @@ const AppProvider = ({children})=>{
     //settings menu
 
     //allies
-    const [characters, setCharacters] = useState([]);
+    //const [characters, setCharacters] = useState([]);
     //allies
 
 
