@@ -43,7 +43,7 @@ const generateCombatEntities = (allies, enemies)=>{
 
     //enemies! Just an array with the ids of the enemies
     enemies.forEach((element)=>{
-        let entity =  new combatEntity(element, num_entities, "b", "none",255); //typeof weapon not necessary, accuracy not necessary
+        let entity =  new combatEntity(listEnemies[element], num_entities, "b", "none", 255); //typeof weapon not necessary, accuracy not necessary
         entitiesBattle.push(entity);
         num_entities++;
     })
@@ -71,6 +71,7 @@ const setBattleStats = (entity, objects)=>{
     })
     entity.stats.hp_max=entity.stats.hp;
     entity.stats.mp_max=entity.stats.mp;
+    entity.stats.down = false;
     return entity;
 }
 

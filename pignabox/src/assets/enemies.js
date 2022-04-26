@@ -1,14 +1,16 @@
 import { Weakness } from "./classes";
 
 class Enemy{
-    constructor(name, type_id, experience_given, hp, strenght, constitution, intelligence, speed, fortune, movement, weakness, abilities_enemy){
+    constructor(name, type_id, ai, experience_given, hp, strenght, constitution, intelligence, speed, fortune, movement, weakness, abilities_enemy){
         this.name= name;
+        this.ai = ai;
         this.type_id= type_id;
         this.level = 1; //how to set the level?
         this.experience_given = experience_given;
         this.stats = 
         {
             hp:hp,
+            mp:0,
             //enemies don't use mp
             strenght:strenght,
             constitution:constitution,
@@ -24,11 +26,16 @@ class Enemy{
     }
 }
 
+//AIs
+//"heavy" - slow, go vs you and attack near u
+//"fast" - go vs you, attack and run away
+//"far" - stay at a fixed distance and do ranged attacks
+
 
 const listEnemies = 
 [
     {//0 
-        ...new Enemy("Frog", 0, 100, 100, 10, 10, 10, 10, 10, 3, new Weakness(1,1,1,1,1,1,1,1), [])
+        ...new Enemy("Frog", 0,"heavy", 100, 100, 10, 10, 10, 10, 10, 3, new Weakness(1,0,1,1,1,1,1,1), [])
     }
 ]
 
