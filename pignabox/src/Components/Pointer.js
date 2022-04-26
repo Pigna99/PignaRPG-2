@@ -4,14 +4,14 @@ import {DIM} from '../CONSTANTS'
 
 function Pointer() {
     const {perspective} = useCameraContext();
-    const {entities} = useBoardContext();
+    const {entities, entitiesPos} = useBoardContext();
     const {activePlayer , playerStatus} = usePlayerContext();
     let xpos = 0;
     let ypos = 0;
     //select the entity
     if(activePlayer!== -1){
-      xpos = entities[activePlayer].xpos
-      ypos = entities[activePlayer].ypos
+      xpos = entitiesPos[activePlayer].xpos
+      ypos = entitiesPos[activePlayer].ypos
     }
 
 

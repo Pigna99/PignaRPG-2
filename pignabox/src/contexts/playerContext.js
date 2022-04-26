@@ -15,7 +15,7 @@ let MOVEMENT = 3;
 const PlayerContext = createContext()
 const PlayerProvider = ({children})=>{
     
-    const {matrix, activeEntity, entitiesMatrix , entities, changeEntityPos} = useBoardContext()
+    const {matrix, activeEntity, entitiesMatrix , entities, entitiesPos, changeEntityPos} = useBoardContext()
 
     //player
 
@@ -28,6 +28,11 @@ const PlayerProvider = ({children})=>{
     //PS LIST
     //READY
     //WAIT
+
+    //mouse handle
+    const [mouseHover, setMouseHover] = useState([]);
+
+    //mouse handle
 
     const setPlayerWait = ()=>{
         setPlayerStatus("WAIT")
@@ -50,6 +55,10 @@ const PlayerProvider = ({children})=>{
             setPlayerMovement(movementMatrix[y][x]-1)
             changeEntityPos(x,y,activeEntity.id)
         }
+    }
+
+    const handleHoverMouse= (x,y)=>{
+        setMouseHover([x,y]);
     }
 
     // const move= (e)=>{ //BROKEN
@@ -108,51 +117,23 @@ const PlayerProvider = ({children})=>{
     // }
 
 
-    useEffect(()=>{
-        setPlayerMovement(MOVEMENT)
-    },[])
-
-    useEffect(()=>{
-
-    },[activePlayer])
-
     useEffect(()=>{//set the active pg (ally team)
         if(activeEntity.team === "a" && entitiesMatrix.length>0){
-            setPlayerMovement(MOVEMENT);//need to personalize the movement of each player
-            setActivePlayer(activeEntity.id)
+            setPlayerMovement(entities[activeEntity.id].stats.movement);//set movement
+            setActivePlayer(activeEntity.id)//for pointer and other
             setPlayerStatus("READY");
-            entities.forEach(entity => {
-                if(entity.id === activeEntity.id){
-                    let initmovementMatrix = generateMovementMatrix(N,M,matrix, entitiesMatrix, entity, playerMovement);
-                    //console.log(initmovementMatrix)
-                    //setMovementMatrix(generateMovementMatrix(N,M,matrix, player, MOVEMENT));
-                    setMovementMatrix(initmovementMatrix);
-                }
-            });
         }else{
             setPlayerStatus("WAIT")
         }
-    },[activeEntity])
+    },[activeEntity])//when the entity change
 
 
-    useEffect(()=>{//just for the first time!
+    useEffect(()=>{
         if(activeEntity.team === "a" && entitiesMatrix.length>0){
-            setActivePlayer(activeEntity.id)
-            setPlayerStatus("READY");
-            setPlayerMovement(MOVEMENT);//need to personalize the movement of each player
-            entities.forEach(entity => {
-                if(entity.id === activeEntity.id){
-                    let initmovementMatrix = generateMovementMatrix(N,M,matrix, entitiesMatrix, entity, playerMovement);
-                    //console.log(initmovementMatrix)
-                    //setMovementMatrix(generateMovementMatrix(N,M,matrix, player, MOVEMENT));
-                    setMovementMatrix(initmovementMatrix);
-                }
-            });
-        }else{
-            setPlayerStatus("WAIT")
+            let initmovementMatrix = generateMovementMatrix(N,M,matrix, entitiesMatrix, entitiesPos[activeEntity.id], playerMovement);
+            setMovementMatrix(initmovementMatrix);
         }
-    },[entitiesMatrix])
-
+    },[playerMovement, activeEntity])
 
     let isTraversable = (x,y)=>{//for access to matrix, reverse x and y coords (ty javascript)
         //console.log(x,y,matrix[y][x])
@@ -166,7 +147,8 @@ const PlayerProvider = ({children})=>{
     return(
         <PlayerContext.Provider value={{
             setPlayerWait, setPlayerReady, changePlayerStatus, handleClick,
-            playerStatus, movementMatrix, activePlayer
+            playerStatus, movementMatrix, activePlayer, handleHoverMouse,
+            mouseHover
         }}>
             {children}
         </PlayerContext.Provider>

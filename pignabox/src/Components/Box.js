@@ -14,11 +14,11 @@ import water from '../img/water.png'
 
 function Box({children, xindex, yindex, value}) {
     const {DEBUG} = useGlobalContext()
-    const {perspective} = useCameraContext()
-    const {handleClick, playerStatus, movementMatrix} = usePlayerContext()
+    const {handleClick, handleHoverMouse, playerStatus, movementMatrix, mouseHover} = usePlayerContext()
   return (
     <div className='box' id={xindex+"-"+yindex} onClick={()=>(movementMatrix[yindex][xindex]>0 ? handleClick(xindex, yindex):"")}
-      style={{backgroundImage:`url(${
+    onMouseEnter={()=>(handleHoverMouse(xindex,yindex))}  
+    style={{backgroundImage:`url(${
         value ==1 ? plain :
         value ==2 ? sand :
         value ==3 ? water :
@@ -31,9 +31,16 @@ function Box({children, xindex, yindex, value}) {
       {DEBUG ? value : ""}
       {children}
       {
-        movementMatrix[yindex][xindex]>0 && playerStatus=="READY"? 
-        <div className='reachable'/>
-        : ""
+        
+        <div className='reachable' style={{
+          transition:`all ${0.8/(movementMatrix[yindex][xindex])}s`,
+          backgroundColor:`rgba(255, 0, 0, ${0.6})`,
+          opacity: 
+          (movementMatrix[yindex][xindex]>0 && playerStatus=="READY")
+          // ( mouseHover[1] <= yindex+1 && mouseHover[1] >=yindex-1 && mouseHover[0] <= xindex+1 && mouseHover[0] >= xindex-1)
+          ? 1 : 0
+        }}/>
+
       }
     </div>
   )

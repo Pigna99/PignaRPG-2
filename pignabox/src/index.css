@@ -74,17 +74,19 @@ code {
 .info{
   position: absolute;
   width: 100%;
-  background-color: rgba(19, 190, 150, 0.72);
   text-align: center;
-  border: 2px solid white;
-  border-radius: 20px;
-  bottom: 130px;
-  height:30px;
-  opacity: 0;
+  bottom: 140px;
+  height:60px;
+  opacity: 1;
   transition: all 0.3s;
   pointer-events: all;
   transform-style:preserve-3d;
-  
+  background-color: rgba(0, 204, 255, 0.5);
+}
+
+.infobox{
+  display: flex;
+  flex-direction: column;
 }
 
 .enemy{
@@ -169,7 +171,7 @@ code {
 }
 
 .boardcontainer{
-  height: fill;
+  height: stretch;
   width: 100%;
   top:0;left: 0;
   display: flex;
@@ -236,6 +238,7 @@ code {
   transform-origin: top right;
   transform: scale(1.5);
   z-index: 5;
+  opacity: 0.85;
 }
 
 .navico{
@@ -278,8 +281,7 @@ code {
   position: absolute;
   width: 100px;
   height: 100px;
-
-  background-color: rgba(255, 0, 0, 0.5);
+  pointer-events: none;
 }
 
 .turnbox{
@@ -289,7 +291,7 @@ code {
   position: absolute;
   width: 130px;
   height: 280px;
-  background-color: rgb(12, 185, 208);
+  background-color: rgba(12, 185, 208, 0.4);
   border: 2px solid white;
   border-radius: 10px;
   top: 200px;

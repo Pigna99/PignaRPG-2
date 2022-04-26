@@ -3,6 +3,8 @@ class combatEntity{
     constructor(oldstats ,id, team, weapon_type, accuracy){
         this.static = oldstats;
         this.id = id;
+        this.name = oldstats.name;
+        this.type_id = oldstats.type_id;
         this.team = team;
         this.weapon_type= weapon_type
         this.weakness = oldstats.weakness;//to update due to accessories
@@ -42,13 +44,14 @@ const generateCombatEntities = (allies, enemies)=>{
     });
 
     //enemies! Just an array with the ids of the enemies
-    enemies.forEach((element)=>{
+    enemies.forEach((element)=>{//nominate if there are more of the same entity
         let entity =  new combatEntity(listEnemies[element], num_entities, "b", "none", 255); //typeof weapon not necessary, accuracy not necessary
+        entity.name = entity.name+" "+num_entities;
         entitiesBattle.push(entity);
         num_entities++;
     })
 
-    console.log(entitiesBattle)
+    //console.log(entitiesBattle)
     return entitiesBattle;
 }
 

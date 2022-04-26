@@ -1,38 +1,15 @@
 import React from 'react'
 import {useBoardContext, useCameraContext} from "../contexts"
 import shadowimg from '../img/shadow.png'
-import { DIM } from '../CONSTANTS';
-//ALL IMAGES FROM PROPS (get from another file?)
-
-import playerimg from '../img/ralsei.webp'
-import frog from '../img/frog.png'
-import tree from '../img/tree.png'
-
-//-------------
-
-
+import { DIM } from '../CONSTANTS'
+import {sprites} from '../assets/sprites'
 
 
 
 function Prop({xpos, ypos, className, onKeyDown, id, clickPropFunction, children, type_id, entity_id}) {
     const {perspective, rotationFull} = useCameraContext()
     const {activeEntity} = useBoardContext()
-    let img = "";
-    //console.log(type_id)
-    switch (type_id) {
-        case 0:
-            img = playerimg;
-            break;
-        case 1:
-            img = frog;
-            break;
-        case 2:
-            img = tree;
-            break;
-        default:
-            break;
-    }
-
+    let img = sprites[type_id]; //take sprite from sprites.js
 
   return (
     <div 
@@ -65,11 +42,11 @@ function Prop({xpos, ypos, className, onKeyDown, id, clickPropFunction, children
                         transform: `rotateX(-90deg) rotateY(${rotationFull.z}deg)`,
                         transformStyle:"preserve-3d"
                     }}
-                ><img src={img} draggable={false} className={"imgprop " + className}/>
+                ><img src={img} draggable={false} className={"imgprop " + className} alt="prop"/>
                 {children}</div>
-                <img src={shadowimg} draggable={false}/>
+                <img src={shadowimg} draggable={false} alt="propshadow"/>
             </>
-            :   <img src={img} draggable={false} className="imgplayertop"/>
+            :   <img src={img} draggable={false} className="imgplayertop" alt="proptop"/>
 
         }
     </div>

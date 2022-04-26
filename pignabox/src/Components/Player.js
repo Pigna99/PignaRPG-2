@@ -11,7 +11,7 @@ function Player() {
     <>
       {
       entities.map((el)=>{
-        if(el.team==="b"){return}//if enemy exit
+        if(el.team==="b"){return ""}//if enemy exit
         let xpos = entitiesPos.length>0 ? entitiesPos[el.id].xpos : 0
         let ypos = entitiesPos.length>0 ? entitiesPos[el.id].ypos : 0
         return(

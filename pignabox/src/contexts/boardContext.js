@@ -1,15 +1,10 @@
 import {React, useState, useEffect, createContext, useContext} from 'react'
 import {newMatrix, generateContinent, generatePrioQueue, nextTurn, generateEntitiesMatrix} from '../utils'
 import { N, M , PRIO_QUEUE_LENGTH} from '../CONSTANTS'
+import { generateCombatEntities } from '../utilsCombat'
+import { listAllies } from '../assets'
 
-const EX_entities = [//this array will generate right before the encounter starts
-    {id:0, name:"player", speed:35, fortune: 20, team:"a", type_id:0},
-    {id:1, name:"ally1", speed:15, fortune: 14, team:"a", type_id:1},
-    {id:2, name:"enemy2", speed:17, fortune: 13, team:"b" , type_id:1},
-    {id:3, name:"enemy3", speed:21, fortune: 21, team:"b" , type_id:1},
-    {id:4, name:"enemy4", speed:8, fortune: 32, team:"b" , type_id:1},
-    {id:5, name:"enemy5", speed:16, fortune: 12, team:"b" , type_id:1}
-]
+const EX_entities = generateCombatEntities(listAllies, [0,0,0])
 
 //team "a" / player and allies
 //team "b" / enemies
@@ -33,8 +28,18 @@ const BoardProvider = ({children})=>{
     const [entitiesMatrix, setEntitiesMatrix] = useState([]) //matrix of the position of each entity on the board(id)
     //entities
 
+
+    const hitAllTest = ()=>{
+        let appentities = entities.slice();
+        
+        appentities.forEach((entity)=>{
+            entity.stats.hp -= 10;
+        })
+        setEntities(appentities)
+    }
+
     const changeEntityPos = (x,y,id)=>{
-        let entrex = entities.slice();
+        let entrex = entitiesPos.slice();
         let entity = entrex[id];
         //set 0 in prev position
         let mat = entitiesMatrix.slice();
@@ -59,18 +64,12 @@ const BoardProvider = ({children})=>{
         let initmatrix = newMatrix(N,M,1)
         let boardmatrix = generateContinent(initmatrix, N, M)
         setMatrix(boardmatrix)//init board matrix
-        setEntities(EX_entities)//init entities
-        let prioInfo =generatePrioQueue(EX_entities, PRIO_QUEUE_LENGTH); //generate prio queue
-        setPrioQueue(prioInfo[0]);
-        setActiveEntity(prioInfo[0][0]);
-        setPrioEntities(prioInfo[1]);
         //inizialize entity matrix to null
         //generate here also the entities matrix!
-        
     },[])
 
     useEffect(()=>{
-        //console.log(prioEntities)
+        //console.log(entitiesPos)
         //console.log(entities)
         //console.log(prioQueue)
         //console.log(entitiesMatrix)
@@ -80,17 +79,21 @@ const BoardProvider = ({children})=>{
     
     useEffect(()=>{
         if(matrix.length>0){//when matrix is initialized, set the EntitiesMatrix
-            let entities_output = generateEntitiesMatrix(N, M, EX_entities, matrix);
+            setEntities(EX_entities)//init entities
+            let entities_output = generateEntitiesMatrix(N, M, EX_entities, matrix);//for positioning of entities
             setEntitiesMatrix(entities_output[0]);
             setEntitiesPos(entities_output[1])// set also the correct position of each entity
-            //console.log(entities_output[1])
+            let prioInfo =generatePrioQueue(EX_entities, PRIO_QUEUE_LENGTH); //generate prio queue for entities
+            setPrioQueue(prioInfo[0]);
+            setActiveEntity(prioInfo[0][0]);
+            setPrioEntities(prioInfo[1]);
         }
-    },[matrix])
+    },[matrix])//after generating the board matrix
     
     return(
         <BoardContext.Provider value={{
             matrix, prioQueue, setNextTurn, activeEntity, entities, entitiesMatrix,
-            changeEntityPos, entitiesPos
+            changeEntityPos, entitiesPos, hitAllTest
         }}>
             {children}
         </BoardContext.Provider>

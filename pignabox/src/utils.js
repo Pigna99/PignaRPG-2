@@ -143,30 +143,30 @@ const generatePrioQueue = (entities, prioLength)=>{
     let first_initiative = 0;
     let prioEntities = [];
     entities.forEach((element,id,array) => {
-        let initiative = Math.random()*10*Math.log(element.fortune);//problems with this random!
+        let initiative = Math.random()*10*Math.log(element.stats.fortune);//problems with this random!
         //console.log(initiative)
         if(initiative> first_initiative){
             first_id=id;
             first_initiative=parseInt(initiative)
         }
         //also calculate the speed impact
-        array[id].speed_prio = calculateSpeedPrio(element.speed)
+        array[id].speed_prio = calculateSpeedPrio(element.stats.speed)
         //console.log(id, array[id].speed_prio)
         array[id].position = parseInt(array[id].speed_prio/(1+Math.random()));
 
-        prioEntities.push({...element,id: element.id, last_position: array[id].position, speed_prio:array[id].speed_prio})
+        prioEntities.push({team:element.team, name:element.name,id: element.id, last_position: array[id].position, speed_prio:array[id].speed_prio})
     });
     //console.log("First turn: "+entities[first_id].name);
     //console.log(entities)
-    entities[first_id].position= 0;
+    entities[first_id].position= 0;//the first turn holder!
 
-    prioEntities.forEach((el,index)=>{
+    prioEntities.forEach((el,index)=>{//set also in the prio queue
         if(el.id === entities[first_id].id){
             prioEntities[index].position = 0;
         }
     })
 
-    let queue = []
+    let queue = []//the queue of turns
     let turn = first_id;
     for(let i=0; i<prioLength; i++){   
         for(let n=0; n< entities.length; n++){//search for min
@@ -254,18 +254,22 @@ const seeForOldEnemies = ( oldenemies, x, y)=>{
 const generateEntitiesMatrix = (N , M, entities, matrix)=>{
     let initmatrix = newMatrix(N,M, -1);
     //console.log(entities,matrix, initmatrix)
+    let entitiesPos = []
     entities.forEach((entity, index)=>{
+        let ent={};
         let x=0; let y=0;
         do{
             x= randomNumber(N);
             y= randomNumber(M);
         }while((matrix[x][y]=== 3 || matrix[x][y]=== 4) || initmatrix[x][y]!=-1)
         initmatrix[x][y]=entity.id;
-        entities[index].xpos = y;
-        entities[index].ypos = x;
+        ent.id = entity.id;
+        ent.xpos = y;
+        ent.ypos = x;
+        entitiesPos.push(ent)
     })
     //console.log(initmatrix)
-    return [initmatrix, entities]
+    return [initmatrix, entitiesPos]
 }
 
 export {newMatrix, generateContinent, generateMovementMatrix, setMouse, generatePrioQueue, nextTurn, getEnemyPos, generateEntitiesMatrix}
