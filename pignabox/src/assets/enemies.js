@@ -1,5 +1,16 @@
+class Weakness{
+    constructor(fire,water,ice,air,slow,blind,mute,poison){
+        this.elements={
+            fire: fire, water: water, ice: ice, air: air
+        }
+        this.status={
+            slow: slow, blind: blind, mute: mute, poison: poison,
+    }
+    }        
+};
+
 class Enemy{
-    constructor(name, type_id, experience_given, hp, strenght, constitution, intelligence, speed, fortune, movement, abilities_enemy){
+    constructor(name, type_id, experience_given, hp, strenght, constitution, intelligence, speed, fortune, movement, weakness, abilities_enemy){
         this.name= name;
         this.type_id= type_id;
         this.level = 1; //how to set the level?
@@ -16,15 +27,7 @@ class Enemy{
             movement:movement,
         }
         //resistence of status and elements
-        this.weakness =
-        {
-            elements:{//elements
-                fire: 0, water: 0, ice: 0, air: 0
-            },
-            status:{//status
-                slow: 0, blind: 0 , mute: 0, poison: 0,
-            },
-        }
+        this.weakness = weakness,
         this.abilities_enemy = abilities_enemy;
     }
 }
@@ -33,7 +36,7 @@ class Enemy{
 const listEnemies = 
 [
     {//0 
-        ...new Enemy("Frog", 0, 100, 100, 10, 10, 10, 10, 10, 3, [])
+        ...new Enemy("Frog", 0, 100, 100, 10, 10, 10, 10, 10, 3, new Weakness(0,0,0,0,0,0,0,0), [])
     }
 ]
 

@@ -1,22 +1,6 @@
-import { listWeapons, listArmors, listEnemies } from "./assets";
+import { listWeapons, listArmors, listEnemies, listAccessories } from "./assets";
 
-let ally =
-        {
-            stats://stats modified in combat
-            {
-                hp_max:100,
-                hp:100,
-                mp_max:10,
-                mp:10,
-                strenght:10,
-                constitution:10,
-                intelligence:10,
-                speed:10,
-                fortune:10,
-                movement:3,
-            },
 
-        }
 class Weakness{
     constructor(fire,water,ice,air,slow,blind,mute,poison){
         this.elements={
@@ -54,7 +38,7 @@ const generateCombatEntities = (allies, enemies)=>{
     let entitiesBattle = [];
     let num_entities = 0;
     allies.forEach((element) => {
-        console.log(element)
+        console.log(element, listWeapons[element.equip.weapon], listArmors[element.equip.armor], listAccessories[element.equip.acc1], listAccessories[element.equip.acc2])
         let entity = new combatEntity(element, num_entities, "a", listWeapons[element.equip.weapon].type)
         //weapon
 
