@@ -44,7 +44,7 @@ function Prop({xpos, ypos, className, onKeyDown, id, clickPropFunction, children
                     }}
                 ><img src={img} draggable={false} className={"imgprop " + className} alt="prop"/>
                 {children}</div>
-                <img src={shadowimg} draggable={false} alt="propshadow"/>
+                <img src={shadowimg} style={{width:"100%"}} draggable={false} alt="propshadow"/>
             </>
             :   <img src={img} draggable={false} className="imgplayertop" alt="proptop"/>
 

@@ -1,6 +1,12 @@
+@font-face {
+  font-family: 'Marchant Copy';
+  src: url(./font/dpcomic.ttf);
+}
 
 #root, html{
   height: 100%;
+  image-rendering:pixelated;
+  font-family: 'Marchant Copy';
 }
 
 body {
