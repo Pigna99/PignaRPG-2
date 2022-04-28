@@ -24,7 +24,6 @@ function Pointer() {
         position:"absolute",
         left:(DIM*xpos), top:(DIM*ypos), width:DIM, height:DIM, transition:"all 0.3s",
         display:"flex", justifyContent:"center", alignItems:"center",transformStyle:"preserve-3d",
-        transform:"scale(0.5) translateZ(230px)",
         animationName:(
           playerStatus==="READY" ? "pointer_ready":""
         )

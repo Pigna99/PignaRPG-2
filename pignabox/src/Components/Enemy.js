@@ -47,7 +47,7 @@ const InfoBox = ({name, hp, hp_max, status})=>{
         >{`${hp} / ${hp_max}`}</div>
         <div style={{
           position:"absolute",
-          width:`${(hp/hp_max)*100}%`, height:"18px", top:43,
+          width:`${(hp/hp_max)*100}%`, height:"18px", top:27,
           backgroundColor:"red", zIndex:-1,
           transition:"all 0.3s"
         }}/>

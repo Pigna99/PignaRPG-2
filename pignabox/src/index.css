@@ -77,12 +77,25 @@ code {
   pointer-events: none;
 }
 
+.infoplayer{
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  bottom: 175px;
+  height:30px;
+  opacity: 1;
+  transition: all 0.3s;
+  pointer-events: all;
+  transform-style:preserve-3d;
+  background-color: rgba(0, 204, 255, 0.5);
+}
+
 .info{
   position: absolute;
   width: 100%;
   text-align: center;
   bottom: 140px;
-  height:60px;
+  height:45px;
   opacity: 1;
   transition: all 0.3s;
   pointer-events: all;
@@ -327,9 +340,9 @@ code {
 /* ANIMATIONS */
 
 @keyframes pointer_ready {
-  0%{transform:translateZ(230px) scale(0.5)}
-  50%{transform:translateZ(220px) scale(0.5)}
-  100%{transform:translateZ(230px) scale(0.5)}
+  0%{transform:translateZ(310px) scale(0.5)}
+  50%{transform:translateZ(300px) scale(0.5)}
+  100%{transform:translateZ(310px) scale(0.5)}
 }
 
 @keyframes start_battle {
