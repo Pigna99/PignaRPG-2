@@ -14,10 +14,15 @@ import water from '../img/water32.png'
 
 function Box({children, xindex, yindex, value}) {
     const {DEBUG} = useGlobalContext()
-    const {handleClick, handleHoverMouse, playerStatus, movementMatrix} = usePlayerContext()
+    const {handleClick, handleHoverMouse, playerStatus, playerMove, movementMatrix, attackMatrix, handleAttack} = usePlayerContext()
   return (
-    <div className='box' id={xindex+"-"+yindex} onClick={()=>(movementMatrix[yindex][xindex]>0 ? handleClick(xindex, yindex):"")}
-    onMouseEnter={()=>(handleHoverMouse(xindex,yindex))}  
+    <div className='box' id={xindex+"-"+yindex}
+      onClick={()=>(
+        movementMatrix[yindex][xindex]>0 && playerMove==="MOVE" ? handleClick(xindex, yindex):
+        attackMatrix[yindex][xindex]>0 && playerMove==="ATTACK" ? handleAttack(xindex,yindex):
+        ""
+        )}
+    onMouseEnter={()=>(handleHoverMouse(xindex,yindex))}  //not used
     style={{backgroundImage:`url(${
         value ===1 ? plain :
         value ===2 ? sand :
@@ -28,7 +33,10 @@ function Box({children, xindex, yindex, value}) {
       backgroundRepeat:"no-repeat",
       backgroundSize:"cover",
       imageRendering:"pixelated",
-      cursor: (movementMatrix[yindex][xindex]>0 && playerStatus=== "READY" ? "pointer" : "default")
+      cursor: (
+        movementMatrix[yindex][xindex]>0 && playerStatus=== "READY" && playerMove==="MOVE" ||
+        attackMatrix[yindex][xindex]>0 && playerMove==="ATTACK"
+      ? "pointer" : "default")
     }}
     >
       {DEBUG ? value : ""}
@@ -36,10 +44,24 @@ function Box({children, xindex, yindex, value}) {
       {
         
         <div className='reachable' style={{
-          transition:`all ${0.8/(movementMatrix[yindex][xindex])}s`,
-          backgroundColor:`rgba(255, 0, 0, ${0.6})`,
+          transition:
+          (movementMatrix[yindex][xindex]>0 && playerStatus==="READY" && playerMove==="MOVE") ?
+          `all ${0.8/(movementMatrix[yindex][xindex])}s` :
+          (attackMatrix[yindex][xindex]>0 && playerStatus==="READY" && playerMove==="ATTACK")
+          ?`all 0.3s`:"",
+          backgroundColor:
+          (movementMatrix[yindex][xindex]>0 && playerStatus==="READY" && playerMove==="MOVE") ?
+          `rgba(255, 0, 0, ${0.6})` :
+          (attackMatrix[yindex][xindex]>0 && playerStatus==="READY" && playerMove==="ATTACK")
+          ? (
+              attackMatrix[yindex][xindex]===1 ? `rgba(155, 0, 155, ${0.5})`: //not reachable
+              attackMatrix[yindex][xindex]===2 ? `rgba(255, 0, 155, ${1})` : //reachable
+              `rgba(155, 0, 155, ${0})`// ally
+            ) : "",
+          
           opacity: 
-          (movementMatrix[yindex][xindex]>0 && playerStatus==="READY")
+          (movementMatrix[yindex][xindex]>0 && playerStatus==="READY" && playerMove==="MOVE") ||
+          (attackMatrix[yindex][xindex]>0 && playerStatus==="READY" && playerMove==="ATTACK")
           // ( mouseHover[1] <= yindex+1 && mouseHover[1] >=yindex-1 && mouseHover[0] <= xindex+1 && mouseHover[0] >= xindex-1)
           ? 1 : 0
         }}/>

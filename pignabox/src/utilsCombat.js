@@ -1,3 +1,5 @@
+import { newMatrix } from "./utils";
+
 import { listWeapons, listArmors, listEnemies, listAccessories } from "./assets";
 class combatEntity{
     constructor(oldstats ,id, team, weapon_type, accuracy){
@@ -87,4 +89,76 @@ const setWeakness = (oldval, newval)=>{
     return oldval
 }
 
-export {generateCombatEntities}
+
+
+const generateAttackMatrix= (N,M,matrix, entitiesMatrix, player, entities, type)=>{
+    let appMatrix = newMatrix(N,M,0);
+    let x= player.ypos; let y=player.xpos;
+    appMatrix[x][y]= -1 // position of player
+    //remember to set to -1 also the position of all other obj not reacheable
+
+    //see all the 4 boxes near, and go recursive
+
+    if(type === "sword"){//check just the near 4 nodes
+        //console.log(entitiesMatrix)
+        if(x+1<N){
+            let right = entitiesMatrix[x+1][y];
+            if(isAnEntity(right)){
+                if(entities[right].team==="b"){
+                    appMatrix[x+1][y]= 2;//can hit an enemy
+                }else{
+                    appMatrix[x+1][y]= 3;//is an ally
+                }
+            }else{
+                appMatrix[x+1][y]= 1;//can hit but nothing
+            }
+        }
+        if(x>0){
+            let left = entitiesMatrix[x-1][y];
+            if(isAnEntity(left)){
+                if(entities[left].team==="b"){
+                    appMatrix[x-1][y]= 2;
+                }else{
+                    appMatrix[x-1][y]= 3;
+                }
+            }else{
+                appMatrix[x-1][y]= 1;
+            }
+        }
+        if(y>0){
+            let down = entitiesMatrix[x][y-1];
+            if(isAnEntity(down)){
+                if(entities[down].team==="b"){
+                    appMatrix[x][y-1]= 2;
+                }else{
+                    appMatrix[x][y-1]= 3;
+                }
+            }else{
+                appMatrix[x][y-1]= 1;
+            }
+        }
+        if(y+1<M){
+            let up = entitiesMatrix[x][y+1];
+            if(isAnEntity(up)){
+                if(entities[up].team==="b"){
+                    appMatrix[x][y+1]= 2;
+                }else{
+                    appMatrix[x][y+1]= 3;
+                }
+            }else{
+                appMatrix[x][y+1]= 1;
+            }
+        }
+    }
+   
+    return appMatrix;
+}
+
+const isAnEntity= (val)=>{
+    if(val> -1){
+        return true
+    }
+    return false
+}
+
+export {generateCombatEntities, generateAttackMatrix}

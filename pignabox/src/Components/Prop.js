@@ -1,5 +1,5 @@
 import React from 'react'
-import {useBoardContext, useCameraContext} from "../contexts"
+import {useBoardContext, useCameraContext, usePlayerContext} from "../contexts"
 import shadowimg from '../img/shadow.png'
 import { DIM } from '../CONSTANTS'
 import {sprites} from '../assets/sprites'
@@ -9,6 +9,7 @@ import {sprites} from '../assets/sprites'
 function Prop({xpos, ypos, className, onKeyDown, id, clickPropFunction, children, type_id, entity_id}) {
     const {perspective, rotationFull} = useCameraContext()
     const {activeEntity} = useBoardContext()
+    const {playerStatus, playerMove, attackMatrix} = usePlayerContext()
     let img = sprites[type_id]; //take sprite from sprites.js
 
   return (
@@ -24,6 +25,7 @@ function Prop({xpos, ypos, className, onKeyDown, id, clickPropFunction, children
             width:DIM, height:DIM, transition:"all 0.3s",
             display:"flex", justifyContent:"center", alignItems:"center",
             transform: `translateX(${xpos? +DIM*xpos : 0}px) translateY(${ypos? DIM*ypos : 0}px)`,
+            
         }}
     >
         <div style={{
@@ -40,9 +42,13 @@ function Prop({xpos, ypos, className, onKeyDown, id, clickPropFunction, children
                 <div className="imgpropcontainer"
                     style={{
                         transform: `rotateX(-90deg) rotateY(${rotationFull.z}deg)`,
-                        transformStyle:"preserve-3d"
+                        transformStyle:"preserve-3d",
                     }}
-                ><img src={img} draggable={false} className={"imgprop " + className} alt="prop"/>
+                ><img src={img} draggable={false} 
+                className={"imgprop " + className
+                 + (playerStatus ==="READY" && playerMove=== "ATTACK" && attackMatrix[ypos][xpos] >1 ? " highlight":"")}
+                  alt="prop"
+                />
                 {children}</div>
                 <img src={shadowimg} style={{width:"100%"}} draggable={false} alt="propshadow"/>
             </>

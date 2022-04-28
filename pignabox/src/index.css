@@ -123,6 +123,11 @@ code {
   width: 100%;
   bottom: 0;
   pointer-events:all;
+  transition: all 0.3s;
+}
+
+.highlight:hover{
+  filter:brightness(200%);
 }
 
 

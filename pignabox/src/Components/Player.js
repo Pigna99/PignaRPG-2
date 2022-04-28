@@ -46,12 +46,14 @@ function Player() {
 }
 
 const ActionsBox = ()=>{
+  const {playerMove, setPlayerAttack, setPlayerMoving} = usePlayerContext()
   return(
   <div style={{position:"absolute", width:"100%", top:-20, display:"flex"}}>
     {
       //set status and active one!
     }
-    <button>muovi</button><button>attacca</button>
+    <button onClick={setPlayerMoving} style={{backgroundColor:playerMove === "MOVE" ? "red" : ""}}>muovi</button>
+    <button onClick={setPlayerAttack} style={{backgroundColor:playerMove === "ATTACK" ? "red" : ""}}>attacca</button>
   </div>)
 }
 

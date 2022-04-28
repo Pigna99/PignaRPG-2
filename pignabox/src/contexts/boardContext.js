@@ -29,6 +29,12 @@ const BoardProvider = ({children})=>{
     //entities
 
 
+    const hitEntity = (id, damage)=>{//damage is already reduced by enemy constitution??
+        let appentities = entities.slice();
+        appentities[id].stats.hp-= damage;
+        setEntities(appentities)
+    }
+
     const hitAllTest = ()=>{
         let appentities = entities.slice();
         
@@ -93,7 +99,7 @@ const BoardProvider = ({children})=>{
     return(
         <BoardContext.Provider value={{
             matrix, prioQueue, setNextTurn, activeEntity, entities, entitiesMatrix,
-            changeEntityPos, entitiesPos, hitAllTest
+            changeEntityPos, entitiesPos, hitAllTest, hitEntity
         }}>
             {children}
         </BoardContext.Provider>

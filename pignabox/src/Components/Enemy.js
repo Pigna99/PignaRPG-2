@@ -1,11 +1,12 @@
 import React from 'react'
 import Prop from './Prop'
 
-import { useBoardContext, useCameraContext } from '../contexts'
+import { useBoardContext, useCameraContext, usePlayerContext } from '../contexts'
 
 function Enemy() {
   const {entities, entitiesPos} = useBoardContext()
   const {rotationFull} = useCameraContext()
+  const {handleAttackEnemy} = usePlayerContext()
   
   return (
     <>
@@ -22,6 +23,7 @@ function Enemy() {
           key = {`enemy-${el.id}`}
           type_id={el.type_id}
           entity_id={el.id}
+          clickPropFunction={()=>{handleAttackEnemy(el.id)}}
         >
           <div className='info' 
           style={{
