@@ -29,7 +29,7 @@ class Enemy{
 //AIs
 //"heavy" - slow, go vs you and attack near u
 //"fast" - go vs you, attack and run away
-//"far" - stay at a fixed distance and do ranged attacks
+//"ranged" - stay at a fixed distance and do ranged attacks
 
 
 const listEnemies = 

@@ -33,7 +33,7 @@ class Ally{
 const listAllies = 
 [
     {// 0
-        ...new Ally("Pigna",0,100,10,10,10,10,10,10,[],[]),
+        ...new Ally("Pigna",0,100,10,10,10,10,20,10,[],[]),
     },
     {// 0
         ...new Ally("Villano",3,100,10,10,10,10,10,10,[],[]),
