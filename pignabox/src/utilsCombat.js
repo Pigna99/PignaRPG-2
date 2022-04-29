@@ -91,7 +91,7 @@ const setWeakness = (oldval, newval)=>{
 
 
 
-const generateAttackMatrix= (N,M,matrix, entitiesMatrix, player, entities, type)=>{
+const generateAttackMatrix= (N,M, matrix, entitiesMatrix, player, entities, type)=>{
     let appMatrix = newMatrix(N,M,0);
     let x= player.ypos; let y=player.xpos;
     appMatrix[x][y]= -1 // position of player
