@@ -4,14 +4,14 @@ import {DIM} from '../CONSTANTS'
 
 function Pointer() {
     const {perspective} = useCameraContext();
-    const {entities, entitiesPos} = useBoardContext();
-    const {activePlayer , playerStatus} = usePlayerContext();
+    const {entitiesPos, activeEntity} = useBoardContext();
+    const {playerStatus} = usePlayerContext();
     let xpos = 0;
     let ypos = 0;
     //select the entity
-    if(activePlayer!== -1){
-      xpos = entitiesPos[activePlayer].xpos
-      ypos = entitiesPos[activePlayer].ypos
+    if(activeEntity.team=== "a"){
+      xpos = entitiesPos[activeEntity.id].xpos
+      ypos = entitiesPos[activeEntity.id].ypos
     }
 
 

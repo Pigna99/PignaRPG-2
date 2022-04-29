@@ -5,13 +5,6 @@ import {generateAttackMatrix} from '../utilsCombat'
 import {useBoardContext} from './boardContext'
 
 
-let playerInit = {
-    xpos:0,
-    ypos:0,
-}
-
-let MOVEMENT = 3;
-
 const PlayerContext = createContext()
 const PlayerProvider = ({children})=>{
     
@@ -22,12 +15,11 @@ const PlayerProvider = ({children})=>{
 
     //player
 
-    const [activePlayer, setActivePlayer] = useState(-1);
-    const [playerMovement, setPlayerMovement] = useState(0)
+    const [playerMovement, setPlayerMovement] = useState(0)//save the player movement remaining
 
     const [playerStatus, setPlayerStatus] = useState("WAIT") //player status
-    const [playerMove, setPlayerMove] = useState("MOVE");
-    const [isPlayerMoveDone, setIsPlayerMoveDone] = useState(false);
+    const [playerMove, setPlayerMove] = useState("MOVE"); //what the player is doing
+    const [isPlayerMoveDone, setIsPlayerMoveDone] = useState(false); //if the player has completed the move or not
 
     const [movementMatrix, setMovementMatrix] = useState(newMatrix(N,M,0))
     const [attackMatrix, setAttackMatrix] = useState(newMatrix(N,M,0))
@@ -35,10 +27,10 @@ const PlayerProvider = ({children})=>{
     //READY
     //WAIT
 
-    //mouse handle
+    //mouse handle for hover, actually not used
     const [mouseHover, setMouseHover] = useState([]);
 
-    //mouse handle
+    //mouse handle for hover, actually not used
 
     const setPlayerWait = ()=>{
         setPlayerStatus("WAIT")
@@ -63,11 +55,11 @@ const PlayerProvider = ({children})=>{
     }
 
     //attack
-    const handleAttack=(x,y)=>{
-        console.log("attacK!")
+    const handleAttack=(x,y)=>{ //when you click on an attackbox
+        console.log("attack!")
     }
 
-    const handleAttackEnemy = (enemy_id)=>{
+    const handleAttackEnemy = (enemy_id)=>{//when you click on an attackable entity
         if(playerMove==="ATTACK"){
             let x=entitiesPos[enemy_id].xpos
             let y=entitiesPos[enemy_id].ypos
@@ -89,7 +81,7 @@ const PlayerProvider = ({children})=>{
     
     //player
 
-    const handleClick= (x,y)=>{
+    const handleClick= (x,y)=>{//click on the movement active box
         if(isTraversable(x,y) && playerStatus==="READY"){//the props are escluded by the movement matrix
             setPlayerMovement(movementMatrix[y][x]-1)
             changeEntityPos(x,y,activeEntity.id)
@@ -115,7 +107,6 @@ const PlayerProvider = ({children})=>{
         if(activeEntity.team === "a" && entitiesMatrix.length>0){
             setIsPlayerMoveDone(false)
             setPlayerMovement(entities[activeEntity.id].stats.movement);//set movement
-            setActivePlayer(activeEntity.id)//for pointer and other
             setPlayerStatus("READY");
             setPlayerMove("MOVE")
         }else{
@@ -133,7 +124,6 @@ const PlayerProvider = ({children})=>{
     },[playerMovement, activeEntity])
 
     let isTraversable = (x,y)=>{//for access to matrix, reverse x and y coords (ty javascript)
-        //console.log(x,y,matrix[y][x])
         if(matrix[y][x]===1 || matrix[y][x]===2){
             return true
         }else{
@@ -144,7 +134,7 @@ const PlayerProvider = ({children})=>{
     return(
         <PlayerContext.Provider value={{
             setPlayerWait, setPlayerReady, changePlayerStatus, handleClick,
-            playerStatus, movementMatrix, activePlayer, handleHoverMouse,
+            playerStatus, movementMatrix, handleHoverMouse,
             mouseHover, playerMove, setPlayerAttack, setPlayerMoving, attackMatrix,
             handleAttack, handleAttackEnemy
         }}>

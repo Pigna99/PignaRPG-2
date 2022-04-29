@@ -199,7 +199,7 @@ const nextTurn= (queue, prioEntities) =>{
     let min = -1;
     prioEntities.forEach((el, index)=>{
         if(el.last_position + el.speed_prio>= last_prio){//found one next turn
-            if(min == -1){
+            if(min === -1){
                 min = index
             }else{
                 if(el.last_position + el.speed_prio <= (prioEntities[min].last_position+prioEntities[min].speed_prio)){
@@ -212,6 +212,11 @@ const nextTurn= (queue, prioEntities) =>{
     queue.push({...prioEntities[min], position: prioEntities[min].last_position+prioEntities[min].speed_prio})
     prioEntities[min].last_position = prioEntities[min].last_position+prioEntities[min].speed_prio;
     return [queue, prioEntities];
+}
+
+const recalcQueue = ()=>{
+    //if an enemy/ally dies/revive 
+
 }
 
 
@@ -232,7 +237,7 @@ const getEnemyPos = (N,M, matrix, entitiesMatrix, oldenemies)=>{
         x= randomNumber(N);
         y= randomNumber(M);
         
-    }while((matrix[x][y]=== 3 || matrix[x][y]=== 4) || entitiesMatrix[x][y]!=-1 || seeForOldEnemies(oldenemies, x, y))
+    }while((matrix[x][y]=== 3 || matrix[x][y]=== 4) || entitiesMatrix[x][y]!==-1 || seeForOldEnemies(oldenemies, x, y))
     position.x=x;
     position.y=y;
     //console.log(position)
@@ -261,7 +266,7 @@ const generateEntitiesMatrix = (N , M, entities, matrix)=>{
         do{
             x= randomNumber(N);
             y= randomNumber(M);
-        }while((matrix[x][y]=== 3 || matrix[x][y]=== 4) || initmatrix[x][y]!=-1)
+        }while((matrix[x][y]=== 3 || matrix[x][y]=== 4) || initmatrix[x][y]!==-1)
         initmatrix[x][y]=entity.id;
         ent.id = entity.id;
         ent.xpos = y;
