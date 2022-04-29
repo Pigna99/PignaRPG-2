@@ -3,7 +3,7 @@ import Prop from './Prop';
 import {useBoardContext, useCameraContext, usePlayerContext} from "../contexts"
 
 function Player() {
-    const {rotationFull} = useCameraContext();
+    const {rotationFull, perspective} = useCameraContext();
     const {setPlayerReady,playerStatus} = usePlayerContext()
     const {entities, entitiesPos, activeEntity} = useBoardContext()
 
@@ -26,7 +26,11 @@ function Player() {
         >
           <div className='infoplayer'
             style={{
-              transform:`rotateX(${rotationFull.x}deg)`}}
+              transform:`rotateX(${rotationFull.x}deg)`,
+              bottom: perspective ? 80 : 200,
+              left:0,
+              zIndex:3
+            }}
             >
               {
                 activeEntity.id === el.id && playerStatus === "READY" ?

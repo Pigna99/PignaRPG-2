@@ -46,7 +46,7 @@ function Board() {
         {
             matrix ?
             matrix.map((row,i)=>row.map((el,j)=>{
-                if(el==4){
+                if(el===4){
                     return <Prop xpos={j} ypos={i} type_id={2} key={`tree-${j}-${i}`} id={`tree-${j}-${i}`} className={"tree"}/>
                 }
             })):""

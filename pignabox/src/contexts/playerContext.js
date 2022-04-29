@@ -1,7 +1,7 @@
 import {React, useState, useEffect, createContext, useContext} from 'react'
 import { N, M } from '../CONSTANTS'
 import {newMatrix, generateMovementMatrix} from '../utils'
-import {generateAttackMatrix} from '../utilsCombat'
+import {generateAttackMatrix, Dijkstra} from '../utilsCombat'
 import {useBoardContext} from './boardContext'
 
 
@@ -83,8 +83,24 @@ const PlayerProvider = ({children})=>{
 
     const handleClick= (x,y)=>{//click on the movement active box
         if(isTraversable(x,y) && playerStatus==="READY"){//the props are escluded by the movement matrix
-            setPlayerMovement(movementMatrix[y][x]-1)
-            changeEntityPos(x,y,activeEntity.id)
+            
+            let steps = Dijkstra(N,M, entitiesPos[activeEntity.id].xpos,  entitiesPos[activeEntity.id].ypos, x, y, movementMatrix)
+            steps.pop();
+            steps.forEach((element, index) => {
+                setTimeout(()=>{
+                    if(index === 0){
+                        setPlayerMovement(movementMatrix[y][x]-1)
+                    }
+                    changeEntityPos(element[0],element[1],activeEntity.id)
+                },((steps.length-index-1) * 300))
+            });
+            let matrixapp = newMatrix(N,M,0);
+            steps.shift();
+            steps.forEach((el, index) => {
+                matrixapp[el[1]][el[0]]=1;
+            })
+            setMovementMatrix(matrixapp);
+            
         }
     }
 
@@ -93,8 +109,8 @@ const PlayerProvider = ({children})=>{
     }
 
     useEffect(()=>{
-        //console.log(attackMatrix)
-    },[attackMatrix])
+        //console.log(movementMatrix)
+    },[movementMatrix])
 
     useEffect(()=>{
         //console.log(playerMove)

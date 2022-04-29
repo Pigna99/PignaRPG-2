@@ -5,7 +5,7 @@ import { useBoardContext, useCameraContext, usePlayerContext } from '../contexts
 
 function Enemy() {
   const {entities, entitiesPos} = useBoardContext()
-  const {rotationFull} = useCameraContext()
+  const {rotationFull, perspective} = useCameraContext()
   const {handleAttackEnemy} = usePlayerContext()
   
   return (
@@ -27,7 +27,10 @@ function Enemy() {
         >
           <div className='info' 
           style={{
-            transform:`rotateX(${rotationFull.x}deg)`
+            transform: !perspective ? `rotateX(${rotationFull.x}deg)` : "",
+            bottom: perspective ? 80 : 140,
+            left:0,
+            zIndex:3
             
             }}><InfoBox name={el.name} hp={el.stats.hp} hp_max={el.stats.hp_max}/></div>
         </Prop>)

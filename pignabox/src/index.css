@@ -54,7 +54,7 @@ code {
   position: absolute;
   width: 100px;
   height: 100px;
-  transition: all 0.3s;
+  /*transition: all 0.3s;*/
 }
 
 
@@ -62,7 +62,7 @@ code {
 .player{
   border: 0px solid rgba(0, 0, 0, 0.11);
   cursor: pointer;
-  transition: transform 0.3s;
+  /*transition: transform 0.3s;*/
 }
 
 .imgpropcontainer{
@@ -73,7 +73,7 @@ code {
   left: 0;
   height:300px;
   transform: rotateX(90deg) rotateY(270deg);
-  transition: all 0.3s;
+  /*transition: all 0.3s;*/
   pointer-events: none;
 }
 
@@ -123,7 +123,7 @@ code {
   width: 100%;
   bottom: 0;
   pointer-events:all;
-  transition: all 0.3s;
+  /*transition: all 0.3s;*/
 }
 
 .highlight:hover{
@@ -133,7 +133,9 @@ code {
 
 
 .imgplayertop{
-  height: 100px;
+  bottom: -15px;
+  position: relative;
+  height: 70px;
   transition: all 0.3s;
   cursor: pointer;
 }
@@ -303,8 +305,8 @@ code {
 
 .reachable{
   position: absolute;
-  width: 100px;
-  height: 100px;
+  width: 102px;
+  height: 102px;
   pointer-events: none;
 }
 

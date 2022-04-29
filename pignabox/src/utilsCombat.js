@@ -161,4 +161,73 @@ const isAnEntity= (val)=>{
     return false
 }
 
-export {generateCombatEntities, generateAttackMatrix}
+
+const Dijkstra = (N,M, ypos1, xpos1, ypos2, xpos2, movementMatrix)=>{
+    let fatherMatrix = newMatrix(N,M, [-1,-1]);
+    fatherMatrix[xpos1][ypos1] = [-2,-2]
+    let queue= [{x:xpos1,y:ypos1}];
+    //console.log(movementMatrix)
+    while(queue.length>0){
+        let p = queue.pop()
+        
+        if(p.x+1<N){
+            if(fatherMatrix[p.x+1][p.y][0] === -1 && movementMatrix[p.x+1][p.y]>0){
+                fatherMatrix[p.x+1][p.y]= [p.x,p.y];
+                if(p.x+1 === xpos2 && p.y === ypos2){
+                   queue=[];
+                    break;
+                }else{
+                    queue.unshift({x:p.x+1, y:p.y}) 
+                }
+            }
+            
+        }
+        if(p.x>0){
+            if(fatherMatrix[p.x-1][p.y][0]===-1 && movementMatrix[p.x-1][p.y]>0){
+                fatherMatrix[p.x-1][p.y]= [p.x,p.y];
+                if(p.x-1 === xpos2 && p.y === ypos2){
+                    queue=[];
+                    break;
+                }else{
+                    queue.unshift({x:p.x-1, y:p.y}) 
+                }
+            }
+        }
+        if(p.y>0){
+            if(fatherMatrix[p.x][p.y-1][0]===-1 && movementMatrix[p.x][p.y-1]>0){
+                fatherMatrix[p.x][p.y-1]= [p.x,p.y];
+                if(p.x === xpos2 && p.y-1 === ypos2){
+                    queue=[];
+                    break;
+                }else{
+                    queue.unshift({x:p.x, y:p.y-1}) 
+                }
+            }
+        }if(p.y+1<M){
+            if(fatherMatrix[p.x][p.y+1][0]===-1 && movementMatrix[p.x][p.y+1]>0){
+                fatherMatrix[p.x][p.y+1]= [p.x,p.y];
+                if(p.x === xpos2 && p.y+1 === ypos2){
+                    queue=[];
+                    break;
+                }else{
+                    queue.unshift({x:p.x, y:p.y+1}) 
+                }
+            }
+        }
+    }
+    //console.log(fatherMatrix)
+    let steps = [[ypos2,xpos2]];
+    let x = xpos2;
+    let y = ypos2;
+    while(fatherMatrix[x][y][0]!== -2){
+        let father = fatherMatrix[x][y];
+        x = father[0];
+        y = father[1];
+        steps.push([y,x])
+    }
+    //start = [xpos1,ypos1]
+    //console.log(steps)
+    return steps
+}
+
+export {generateCombatEntities, generateAttackMatrix, Dijkstra}

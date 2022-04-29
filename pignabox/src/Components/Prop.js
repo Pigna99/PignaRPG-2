@@ -25,7 +25,7 @@ function Prop({xpos, ypos, className, onKeyDown, id, clickPropFunction, children
             width:DIM, height:DIM, transition:"all 0.3s",
             display:"flex", justifyContent:"center", alignItems:"center",
             transform: `translateX(${xpos? +DIM*xpos : 0}px) translateY(${ypos? DIM*ypos : 0}px)`,
-            
+            zIndex:0
         }}
     >
         <div style={{
@@ -34,7 +34,7 @@ function Prop({xpos, ypos, className, onKeyDown, id, clickPropFunction, children
             backgroundColor:(activeEntity.team === "a" ? "rgb(0, 0, 255, 0.7)" : "rgb(255, 0, 0, 0.7)"),
             borderRadius:"50%", zIndex:-2,
             border:"2px solid white", opacity: (activeEntity.id === entity_id ? 0.7 : 0),
-            transition:"all 0.3s"
+            transition:"all 0.3s",
         }}/>
         {
             !perspective ?
@@ -43,6 +43,7 @@ function Prop({xpos, ypos, className, onKeyDown, id, clickPropFunction, children
                     style={{
                         transform: `rotateX(-90deg) rotateY(${rotationFull.z}deg)`,
                         transformStyle:"preserve-3d",
+                        transition:"all 0.3s"
                     }}
                 ><img src={img} draggable={false} 
                 className={"imgprop " + className
@@ -52,11 +53,23 @@ function Prop({xpos, ypos, className, onKeyDown, id, clickPropFunction, children
                 {children}</div>
                 <img src={shadowimg} style={{width:"100%"}} draggable={false} alt="propshadow"/>
             </>
-            :   <img src={img} draggable={false} className="imgplayertop" alt="proptop"/>
-
+            :   
+                <TopContainer img={img}>{children}</TopContainer>
         }
     </div>
   )
+}
+
+
+const TopContainer = ({children, img})=>{
+    return(
+    <div>
+        <img src={img} draggable={false} className="imgplayertop" alt="proptop"
+        />
+        {
+            children
+        }
+    </div>)
 }
 
 export default Prop
