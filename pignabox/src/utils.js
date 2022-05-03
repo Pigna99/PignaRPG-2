@@ -260,12 +260,20 @@ const generateEntitiesMatrix = (N , M, entities, matrix)=>{
     let initmatrix = newMatrix(N,M, -1);
     //console.log(entities,matrix, initmatrix)
     let entitiesPos = []
+    //displacement used for the position of the teams
+    let displacementx = Math.floor(N/2) 
+    let displacementy = Math.floor(M/2)
     entities.forEach((entity, index)=>{
         let ent={};
         let x=0; let y=0;
         do{
-            x= randomNumber(N);
-            y= randomNumber(M);
+            if(entity.team==="a"){ //quadrant n/2 * m/2 (floor)
+                x= randomNumber(displacementx);
+                y= randomNumber(displacementy);
+            }else if(entity.team==="b"){ //opposite quadrant of team a
+                x= N - 1 - randomNumber(displacementx);
+                y= M - 1 - randomNumber(displacementy);
+            }
         }while((matrix[x][y]=== 3 || matrix[x][y]=== 4) || initmatrix[x][y]!==-1)
         initmatrix[x][y]=entity.id;
         ent.id = entity.id;
