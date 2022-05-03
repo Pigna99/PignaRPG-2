@@ -3,7 +3,7 @@ Accessible at [https://boardgametest.netlify.app/](https://boardgametest.netlify
 
 To do list:
 
-- [ ] Allies and Enemies position on matrix when generate matrixPos (generateEntitiesMatrix in utils.js)
+- [X] Allies and Enemies position on matrix when generate matrixPos (generateEntitiesMatrix in utils.js)
 - [ ] Name (number) of Enemies of the same type
 - [ ] Change PrioQueue when an enemy dies / an ally is down
 - [ ] Change PrioQueue on status afflicted (slow/fast)
