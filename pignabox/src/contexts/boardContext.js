@@ -4,7 +4,7 @@ import { N, M , PRIO_QUEUE_LENGTH} from '../CONSTANTS'
 import { generateCombatEntities } from '../utilsCombat'
 import { listAllies } from '../assets'
 
-const EX_entities = generateCombatEntities(listAllies, [0,0,0])
+const EX_entities = generateCombatEntities(listAllies, [0,0,1])
 
 //team "a" / player and allies
 //team "b" / enemies

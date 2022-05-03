@@ -46,12 +46,27 @@ const generateCombatEntities = (allies, enemies)=>{
     });
 
     //enemies! Just an array with the ids of the enemies
+    let num_enemies = {};
+    //init array for calculate the number of each enemy
+    enemies.forEach((element)=>{num_enemies[element]=0})
+
     enemies.forEach((element)=>{//nominate if there are more of the same entity
         let entity =  new combatEntity(listEnemies[element], num_entities, "b", "none", 255); //typeof weapon not necessary, accuracy not necessary
-        entity.name = entity.name+" "+num_entities;
+        num_enemies[element]++;
+        if(num_enemies[element]!==1){
+            if(num_enemies[element]===2){//we have to set back the prev one to 1 ("name 1")  
+                entitiesBattle.forEach((elback, index)=>{
+                    if(elback.name === entity.name){
+                        entitiesBattle[index].name = elback.name + " 1";
+                    }
+                })
+            }
+            entity.name = entity.name+" "+num_enemies[element]; //("name 2") etc
+        }
         entitiesBattle.push(entity);
         num_entities++;
     })
+    console.log(num_enemies)
 
     //console.log(entitiesBattle)
     return entitiesBattle;
@@ -98,7 +113,6 @@ const generateAttackMatrix= (N,M, matrix, entitiesMatrix, player, entities, type
     //remember to set to -1 also the position of all other obj not reacheable
 
     //see all the 4 boxes near, and go recursive
-
     if(type === "sword"){//check just the near 4 nodes
         //console.log(entitiesMatrix)
         if(x+1<N){
