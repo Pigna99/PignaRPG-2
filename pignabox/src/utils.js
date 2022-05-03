@@ -190,11 +190,12 @@ const generatePrioQueue = (entities, prioLength)=>{
 }
 
 
-const nextTurn= (queue, prioEntities) =>{
+const nextTurn= (queue, prioEntities, force=false) =>{
     //get the last priority
     let last_prio = queue[queue.length-1].position;//the queue is used only for get the last position
-    queue.shift(); //remove the first one
-
+    if(!force){
+        queue.shift(); //remove the first one
+    }
     //console.log(queue)
     let min = -1;
     prioEntities.forEach((el, index)=>{
@@ -214,8 +215,19 @@ const nextTurn= (queue, prioEntities) =>{
     return [queue, prioEntities];
 }
 
-const recalcQueue = ()=>{
+const removeQueue = (queue, prioEntities, id, PRIO_QUEUE_LENGTH) =>{
+    prioEntities[id].position=999999999; //set his position to infinite!
+    prioEntities[id].last_position=999999999; //set his position to infinite!
+    queue.forEach((el,index)=>{
+        if(el.id===id){//found the one to remove
+            queue.splice(index,1)
+        }
+    })
+    while(queue.length!== PRIO_QUEUE_LENGTH){
+        queue = nextTurn(queue,prioEntities, true)[0];
+    }
     //if an enemy/ally dies/revive 
+    return [queue, prioEntities];
 
 }
 
@@ -285,4 +297,8 @@ const generateEntitiesMatrix = (N , M, entities, matrix)=>{
     return [initmatrix, entitiesPos]
 }
 
-export {newMatrix, generateContinent, generateMovementMatrix, setMouse, generatePrioQueue, nextTurn, getEnemyPos, generateEntitiesMatrix}
+export 
+{
+    newMatrix, generateContinent, generateMovementMatrix, setMouse, generatePrioQueue, nextTurn, getEnemyPos, generateEntitiesMatrix,
+    removeQueue
+}

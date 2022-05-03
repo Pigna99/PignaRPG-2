@@ -5,8 +5,9 @@ To do list:
 
 - [X] Allies and Enemies position on matrix when generate matrixPos (generateEntitiesMatrix in utils.js)
 - [X] Name (number) of Enemies of the same type
-- [ ] Enemies die
-- [ ] Change PrioQueue when an enemy dies / an ally is down
+- [X] Enemies die
+- [X] Change PrioQueue when an enemy dies
+- [ ] Change PrioQueue when an ally is down
 - [ ] Change PrioQueue on status afflicted (slow/fast)
 - [ ] Enemy AI / "heavy" (movement)
 - [ ] Enemy AI / "heavy" (attack)
@@ -16,6 +17,7 @@ To do list:
 - [ ] Trees and other ambient objects in team "c"
 - [ ] Trees and other ambient objects collectables
 - [ ] Inventory and use of objects
+- [ ] Attack / Defense (Algorithms for calculate damage)
 
 Bugs to fix:
 

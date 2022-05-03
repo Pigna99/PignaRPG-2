@@ -15,6 +15,9 @@ function Enemy() {
         if(el.team==="a"){return ""}
           let xpos = entitiesPos.length>0 ? entitiesPos[el.id].xpos : 0
           let ypos = entitiesPos.length>0 ? entitiesPos[el.id].ypos : 0
+          if(!el.stats.down){
+
+          
         return(
         <Prop className={'enemy'} 
           tabIndex={0}
@@ -33,7 +36,7 @@ function Enemy() {
             zIndex:3
             
             }}><InfoBox name={el.name} hp={el.stats.hp} hp_max={el.stats.hp_max}/></div>
-        </Prop>)
+        </Prop>)}else{return("")}
       })
     }
     </>

@@ -38,7 +38,7 @@ const listEnemies =
         ...new Enemy("Frog", 1,"heavy", 100, 100, 10, 10, 10, 10, 10, 3, new Weakness(1,0,1,1,1,1,1,1), [])
     },
     {//1
-        ...new Enemy("Fat", 4, "heavy", 100, 100, 10, 10, 10, 5, 20, 2, new Weakness(1,1,1,1,1,1,1,1), [])
+        ...new Enemy("Fat", 4, "heavy", 100, 20, 10, 10, 10, 5, 20, 2, new Weakness(1,1,1,1,1,1,1,1), [])
     }
 ]
 

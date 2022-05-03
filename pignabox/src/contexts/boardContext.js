@@ -1,5 +1,5 @@
 import {React, useState, useEffect, createContext, useContext} from 'react'
-import {newMatrix, generateContinent, generatePrioQueue, nextTurn, generateEntitiesMatrix} from '../utils'
+import {newMatrix, generateContinent, generatePrioQueue, nextTurn, generateEntitiesMatrix, removeQueue} from '../utils'
 import { N, M , PRIO_QUEUE_LENGTH} from '../CONSTANTS'
 import { generateCombatEntities } from '../utilsCombat'
 import { listAllies } from '../assets'
@@ -29,11 +29,27 @@ const BoardProvider = ({children})=>{
     //entities
 
 
+    
     const hitEntity = (id, damage)=>{//damage is already reduced by enemy constitution??
         let appentities = entities.slice();
         appentities[id].stats.hp-= damage;
+        if(appentities[id].stats.hp<=0){//enemy defeated
+            appentities[id].stats.down = true;
+            resetEntityPos(entitiesPos[id].xpos, entitiesPos[id].ypos);
+            //appentities.splice(id,1);//THIS IS SO DOUNGEROUS TO DO!
+            //remove it from the element, not from the entity list
+            let newQueue = removeQueue(prioQueue,prioEntities,id, PRIO_QUEUE_LENGTH)
+            console.log(newQueue)
+            setPrioQueue(newQueue[0])
+            setPrioEntities(newQueue[1])
+
+            //also remove from all the others queues
+
+            //recalc the queue!
+        }   
         setEntities(appentities)
     }
+
 
     const hitAllTest = ()=>{
         let appentities = entities.slice();
@@ -54,6 +70,12 @@ const BoardProvider = ({children})=>{
         entrex[id].xpos = x;
         entrex[id].ypos = y;
         setEntitiesPos(entrex);
+        setEntitiesMatrix(mat);
+    }
+
+    const resetEntityPos = (x,y)=>{
+        let mat = entitiesMatrix.slice();
+        mat[y][x] = -1;
         setEntitiesMatrix(mat);
     }
     

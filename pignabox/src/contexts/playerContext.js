@@ -67,6 +67,12 @@ const PlayerProvider = ({children})=>{
                 //console.log(entities[enemy_id])
                 hitEntity(enemy_id, entities[activeEntity.id].stats.strenght)
                 setAttackMatrix(newMatrix(N,M,0)) //reset Attack matrix to 0 after attack
+
+                //reset Also the MovementMatrix (if the enemy dies, now you can go!)
+                let initmovementMatrix = generateMovementMatrix(N,M,matrix, entitiesMatrix, entitiesPos[activeEntity.id], playerMovement);
+                setMovementMatrix(initmovementMatrix);
+                //reset Also the MovementMatrix
+
                 setIsPlayerMoveDone(true)
             }
             
@@ -96,7 +102,7 @@ const PlayerProvider = ({children})=>{
             });
             let matrixapp = newMatrix(N,M,0);
             steps.shift();
-            steps.forEach((el, index) => {
+            steps.forEach((el) => {
                 matrixapp[el[1]][el[0]]=1;
             })
             setMovementMatrix(matrixapp);

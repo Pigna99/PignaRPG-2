@@ -66,7 +66,6 @@ const generateCombatEntities = (allies, enemies)=>{
         entitiesBattle.push(entity);
         num_entities++;
     })
-    console.log(num_enemies)
 
     //console.log(entitiesBattle)
     return entitiesBattle;
