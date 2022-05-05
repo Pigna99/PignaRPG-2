@@ -17,6 +17,7 @@ To do list:
 - [ ] Trees and other ambient objects in team "c"
 - [ ] Trees and other ambient objects collectables
 - [ ] Inventory and use of objects
+- [ ] Change Public Info (index.html/manifest)
 - [ ] Attack / Defense (Algorithms for calculate damage)
 
 Bugs to fix:
