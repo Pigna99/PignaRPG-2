@@ -1,11 +1,11 @@
 import React from 'react'
-import { useBoardContext } from '../contexts'
-import { DEBUG } from '../CONSTANTS';
+import { useBoardContext } from '../../contexts'
+import { DEBUG } from '../../CONSTANTS';
 
 function TurnBox() {
     const {prioQueue,setNextTurn} = useBoardContext()
-    const first_queue= prioQueue.length!= 0 ? prioQueue[0].position : 0;
-    const last_queue = prioQueue.length!= 0 ? prioQueue[9].position : 0;
+    const first_queue= prioQueue.length!== 0 ? prioQueue[0].position : 0;
+    const last_queue = prioQueue.length!== 0 ? prioQueue[9].position : 0;
     const normalize = (pos, displ)=>{
         return pos*(400/displ)
     }

@@ -324,6 +324,21 @@ code {
   pointer-events: none;
 }
 
+.playerbox{
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: absolute;
+  width: 300px;
+  background-color: rgba(12, 185, 208, 0.4);
+  border: 2px solid white;
+  border-radius: 10px;
+  bottom: 100px;
+  left: 10px;
+  z-index: 5;
+  transition: all 0.3s;
+}
+
 .turnbox{
   display: flex;
   flex-direction: column;

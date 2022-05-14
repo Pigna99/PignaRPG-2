@@ -37,7 +37,10 @@ const listAllies =
     },
     {// 0
         ...new Ally("Villano",3,100,10,10,10,10,10,10,[],[]),
-    }
+    },
+    {// 0
+        ...new Ally("Axy",5,120,13,11,15,23,12,11,[],[]),
+    },
 ]
 
 export {listAllies}

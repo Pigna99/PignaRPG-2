@@ -9,6 +9,8 @@ To do list:
 - [X] Change PrioQueue when an enemy dies
 - [X] Sounds
 - [X] Test Menu
+- [X] HUD / Players
+- [ ] All hud and command menu 
 - [ ] Change PrioQueue when an ally is down
 - [ ] Change PrioQueue on status afflicted (slow/fast)
 - [ ] Enemy AI / "heavy" (movement)
