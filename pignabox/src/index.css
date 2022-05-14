@@ -27,6 +27,20 @@ body {
   background-color: rgb(124, 228, 231);
 }
 
+.mainmenu{
+  display: flex;
+  width: 300px;
+  background-color: rgba(133, 154, 209, 0.484);
+  align-items: center;
+  padding: 15px;
+  flex-flow: column;
+}
+
+.battleApp{
+  overflow: hidden;
+  height: 100%;
+}
+
 h4{
   margin: 0;
   text-align: center;

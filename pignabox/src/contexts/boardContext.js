@@ -1,4 +1,6 @@
 import {React, useState, useEffect, createContext, useContext} from 'react'
+import useSound from 'use-sound';
+import { sounds } from '../sound';
 import {newMatrix, generateContinent, generatePrioQueue, nextTurn, generateEntitiesMatrix, removeQueue} from '../utils'
 import { N, M , PRIO_QUEUE_LENGTH} from '../CONSTANTS'
 import { generateCombatEntities } from '../utilsCombat'
@@ -11,6 +13,12 @@ const EX_entities = generateCombatEntities(listAllies, [0,0,1])
 
 const BoardContext = createContext()
 const BoardProvider = ({children})=>{
+    
+    //sounds
+    const [playHit] = useSound(sounds.attack);
+    //sounds
+
+
     //board
     const [matrix, setMatrix] = useState([]) //board matrix for bioma
     //board
@@ -31,6 +39,7 @@ const BoardProvider = ({children})=>{
 
     
     const hitEntity = (id, damage)=>{//damage is already reduced by enemy constitution??
+        playHit();
         let appentities = entities.slice();
         appentities[id].stats.hp-= damage;
         if(appentities[id].stats.hp<=0){//enemy defeated

@@ -7,6 +7,8 @@ To do list:
 - [X] Name (number) of Enemies of the same type
 - [X] Enemies die
 - [X] Change PrioQueue when an enemy dies
+- [X] Sounds
+- [X] Test Menu
 - [ ] Change PrioQueue when an ally is down
 - [ ] Change PrioQueue on status afflicted (slow/fast)
 - [ ] Enemy AI / "heavy" (movement)
@@ -17,8 +19,9 @@ To do list:
 - [ ] Trees and other ambient objects in team "c"
 - [ ] Trees and other ambient objects collectables
 - [ ] Inventory and use of objects
-- [ ] Change Public Info (index.html/manifest)
+- [X] Change Public Info (index.html/manifest)
 - [ ] Attack / Defense (Algorithms for calculate damage)
+
 
 Bugs to fix:
 

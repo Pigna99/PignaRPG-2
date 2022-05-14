@@ -6,7 +6,7 @@ function BoardContainer() {
     const {scaling, movingAxes, handleCameraMovement  } = useCameraContext()
   return (
     <div className="boardcontainer" style={{
-        perspective:2600,
+        perspective:3600,
         transform:`scale(${scaling/50})`,
         zIndex:1,
         position:"relative",
