@@ -59,7 +59,6 @@ let generateMovementMatrix= (N,M,matrix, entitiesMatrix, player, mov)=>{
     let queue= [{x,y,mov}];
     while(queue.length>0){
         let p = queue.pop()
-
         if(p.x+1<N){
             if(appMatrix[p.x+1][p.y]===0 && p.mov>0 ){
                 if(isReachable(matrix[p.x+1][p.y]) && notOtherEntities(entitiesMatrix[p.x+1][p.y])){
@@ -104,6 +103,87 @@ let generateMovementMatrix= (N,M,matrix, entitiesMatrix, player, mov)=>{
     return appMatrix;
 }
 
+let getNearAlly= (N,M,matrix,entities, entitiesMatrix, enemy, mov)=>{
+    let appMatrix = newMatrix(N,M,0);
+    let x= enemy.ypos; let y=enemy.xpos;
+    appMatrix[x][y]= -1 // position of enemy
+
+    let queue= [{x,y,mov}];
+    while(queue.length>0){
+        let p = queue.pop()
+        if(p.x+1<N){
+            let appx = p.x+1; let appy = p.y;
+            if(appMatrix[appx][appy]===0 && p.mov>0 ){
+                if(isReachable(matrix[appx][appy])){
+                    if(entitiesMatrix[appx][appy]>-1){//there is an entity, see the team
+                        if(entities[entitiesMatrix[appx][appy]].team==="a"){
+                            return p
+                        }
+                    }else{
+                        appMatrix[appx][appy]=p.mov;
+                        queue.unshift({x:appx, y:appy, mov:p.mov-1})  
+                    }
+                       
+                }else{
+                    appMatrix[appx][appy]=-1;
+                }
+            }
+        }
+        if(p.x>0){
+            let appx = p.x-1; let appy = p.y;
+            if(appMatrix[appx][appy]===0 && p.mov>0 ){
+                if(isReachable(matrix[appx][appy])){
+                    if(entitiesMatrix[appx][appy]>-1){//there is an entity, see the team
+                        if(entities[entitiesMatrix[appx][appy]].team==="a"){
+                            return p
+                        }
+                    }else{
+                        appMatrix[appx][appy]=p.mov;
+                        queue.unshift({x:appx, y:appy, mov:p.mov-1})  
+                    }
+                }else{
+                    appMatrix[appx][appy]=-1;
+                }
+            }
+        }
+        if(p.y>0){
+            let appx = p.x; let appy = p.y-1;
+            if(appMatrix[appx][appy]===0 && p.mov>0 ){
+                if(isReachable(matrix[appx][appy])){
+                    if(entitiesMatrix[appx][appy]>-1){//there is an entity, see the team
+                        if(entities[entitiesMatrix[appx][appy]].team==="a"){
+                            return p
+                        }
+                    }else{
+                        appMatrix[appx][appy]=p.mov;
+                        queue.unshift({x:appx, y:appy, mov:p.mov-1})  
+                    }
+                }else{
+                    appMatrix[appx][appy]=-1;
+                }
+            }
+        }if(p.y+1<M){
+            let appx = p.x; let appy = p.y+1;
+            if(appMatrix[appx][appy]===0 && p.mov>0 ){
+                if(isReachable(matrix[appx][appy])){
+                    if(entitiesMatrix[appx][appy]>-1){//there is an entity, see the team
+                        if(entities[entitiesMatrix[appx][appy]].team==="a"){
+                            return p
+                        }
+                    }else{
+                        appMatrix[appx][appy]=p.mov;
+                        queue.unshift({x:appx, y:appy, mov:p.mov-1})  
+                    }
+                }else{
+                    appMatrix[appx][appy]=-1;
+                }
+            }
+        }
+    }
+   
+    return false //if no ally found
+}
+
 let isReachable= (el)=>{
     if(el!==3 && el!==4){
         return true
@@ -117,6 +197,8 @@ let notOtherEntities= (el)=>{
     }
     return false
 }
+
+
 
 
 const setMouse = (x,y)=>{
@@ -300,5 +382,5 @@ const generateEntitiesMatrix = (N , M, entities, matrix)=>{
 export 
 {
     newMatrix, generateContinent, generateMovementMatrix, setMouse, generatePrioQueue, nextTurn, getEnemyPos, generateEntitiesMatrix,
-    removeQueue
+    removeQueue, getNearAlly
 }

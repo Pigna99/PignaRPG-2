@@ -1,6 +1,6 @@
 import React from 'react'
 import { useGlobalContext } from '../context'
-import {usePlayerContext} from "../contexts"
+import {useEnemyContext, usePlayerContext} from "../contexts"
 
 import plain from '../img/plain32.png'
 import sand from '../img/sand32.png'
@@ -34,8 +34,8 @@ function Box({children, xindex, yindex, value}) {
       backgroundSize:"cover",
       imageRendering:"pixelated",
       cursor: (
-        movementMatrix[yindex][xindex]>0 && playerStatus=== "READY" && playerMove==="MOVE" ||
-        attackMatrix[yindex][xindex]>0 && playerMove==="ATTACK"
+        (movementMatrix[yindex][xindex]>0 && playerStatus=== "READY" && playerMove==="MOVE") ||
+        (attackMatrix[yindex][xindex]>0 && playerMove==="ATTACK")
       ? "pointer" : "default")
     }}
     >
@@ -52,18 +52,22 @@ function Box({children, xindex, yindex, value}) {
           backgroundColor:
           (movementMatrix[yindex][xindex]>0 && playerStatus==="READY" && playerMove==="MOVE") ?
           `rgba(255, 0, 0, ${0.6})` :
-          (attackMatrix[yindex][xindex]>0 && playerStatus==="READY" && playerMove==="ATTACK")
-          ? (
+          (attackMatrix[yindex][xindex]===2 && playerStatus==="READY" && playerMove==="MOVE") ?
+          `rgba(255, 0, 155, ${1})`:
+          (attackMatrix[yindex][xindex]>0 && playerStatus==="READY" && playerMove==="ATTACK") ? 
+            (
               attackMatrix[yindex][xindex]===1 ? `rgba(155, 0, 155, ${0.5})`: //not reachable
               attackMatrix[yindex][xindex]===2 ? `rgba(255, 0, 155, ${1})` : //reachable
               `rgba(155, 0, 155, ${0})`// ally
-            ) : "",
+            ) : 
+            (movementMatrix[yindex][xindex]>0) ? `rgba(255, 0, 0, ${0.1})` : //enemy movement debug
+            "",
           
           opacity: 
           (movementMatrix[yindex][xindex]>0 && playerStatus==="READY" && playerMove==="MOVE") ||
-          (attackMatrix[yindex][xindex]>0 && playerStatus==="READY" && playerMove==="ATTACK")
+          (attackMatrix[yindex][xindex]>0 && playerStatus==="READY")
           // ( mouseHover[1] <= yindex+1 && mouseHover[1] >=yindex-1 && mouseHover[0] <= xindex+1 && mouseHover[0] >= xindex-1)
-          ? 1 : 0
+          ? 1 : 1
         }}/>
 
       }

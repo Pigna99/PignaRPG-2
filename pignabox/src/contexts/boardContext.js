@@ -37,6 +37,14 @@ const BoardProvider = ({children})=>{
     //entities
 
 
+    //movement on the board
+
+    const [movementMatrix, setMovementMatrix] = useState(newMatrix(N,M,0))
+    const [attackMatrix, setAttackMatrix] = useState(newMatrix(N,M,0))
+
+    //movement on the board
+
+
     
     const hitEntity = (id, damage)=>{//damage is already reduced by enemy constitution??
         playHit();
@@ -130,7 +138,8 @@ const BoardProvider = ({children})=>{
     return(
         <BoardContext.Provider value={{
             matrix, prioQueue, setNextTurn, activeEntity, entities, entitiesMatrix,
-            changeEntityPos, entitiesPos, hitAllTest, hitEntity
+            changeEntityPos, entitiesPos, hitAllTest, hitEntity,
+            movementMatrix, attackMatrix ,setMovementMatrix ,setAttackMatrix
         }}>
             {children}
         </BoardContext.Provider>

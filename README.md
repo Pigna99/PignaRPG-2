@@ -10,10 +10,11 @@ To do list:
 - [X] Sounds
 - [X] Test Menu
 - [X] HUD / Players
-- [ ] All hud and command menu 
+- [X] All hud and command menu 
+- [ ] Display damage after hit
 - [ ] Change PrioQueue when an ally is down
 - [ ] Change PrioQueue on status afflicted (slow/fast)
-- [ ] Enemy AI / "heavy" (movement)
+- [X] Enemy AI / "heavy" (movement)
 - [ ] Enemy AI / "heavy" (attack)
 - [ ] Abilities / Spells for allies
 - [ ] Better hit animations

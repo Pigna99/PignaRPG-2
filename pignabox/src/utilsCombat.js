@@ -1,6 +1,7 @@
-import { newMatrix } from "./utils";
+import { generateMovementMatrix, getNearAlly, newMatrix } from "./utils";
 
 import { listWeapons, listArmors, listEnemies, listAccessories } from "./assets";
+import { M, N } from "./CONSTANTS";
 class combatEntity{
     constructor(oldstats ,id, team, weapon_type, accuracy){
         this.static = oldstats;
@@ -243,4 +244,21 @@ const Dijkstra = (N,M, ypos1, xpos1, ypos2, xpos2, movementMatrix)=>{
     return steps
 }
 
-export {generateCombatEntities, generateAttackMatrix, Dijkstra}
+
+const enemyMovement = (entities, activeEntity, entitiesMatrix, matrix, entitiesPos)=>{
+    //first generate the movementMatrix for the enemy
+    let nearestAlly = getNearAlly(N,M,matrix, entities, entitiesMatrix, activeEntity, 99)
+    //console.log(nearestAlly, activeEntity)
+    let movMatrix = generateMovementMatrix(N,M,matrix,entitiesMatrix,activeEntity,99);
+    //add allies on the path
+    entities.forEach((en)=>{
+        if(en.team==="a"){
+            movMatrix[entitiesPos[en.id].ypos][entitiesPos[en.id].xpos]=1;
+        }
+    })
+    if(nearestAlly===false){return []}
+    let nearestPath = Dijkstra(N,M, activeEntity.xpos, activeEntity.ypos, nearestAlly.y, nearestAlly.x, movMatrix)
+    return nearestPath;
+}
+
+export {generateCombatEntities, generateAttackMatrix, Dijkstra, enemyMovement}

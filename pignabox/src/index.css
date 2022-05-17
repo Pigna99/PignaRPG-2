@@ -330,13 +330,21 @@ code {
   overflow: hidden;
   position: absolute;
   width: 300px;
-  background-color: rgba(12, 185, 208, 0.4);
-  border: 2px solid white;
-  border-radius: 10px;
-  bottom: 100px;
+  bottom: 10px;
   left: 10px;
   z-index: 5;
   transition: all 0.3s;
+}
+
+.optionsmenu>button{
+  border-radius: 0px;
+  background-color: white;
+  border: 2px solid white;
+  color: black;
+  cursor: pointer;
+}
+.optionsmenu>button:hover{
+  background-color: rgba(0, 0, 255, 0.404);
 }
 
 .turnbox{

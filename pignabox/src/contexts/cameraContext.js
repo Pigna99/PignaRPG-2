@@ -1,7 +1,7 @@
 import {React, useState, useEffect, createContext, useContext} from 'react'
 
 const NO_ROTATION = {x:70,y:0,z:0}
-const START_ROTATION = {x:50,y:0,z:310}
+const START_ROTATION = {x:60,y:0,z:310}
 
 
 const CameraContext = createContext()

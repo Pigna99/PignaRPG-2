@@ -10,7 +10,7 @@ const PlayerProvider = ({children})=>{
     
     const {
         matrix, activeEntity, entitiesMatrix , entities, entitiesPos, changeEntityPos,
-        hitEntity,
+        hitEntity, movementMatrix, attackMatrix, setMovementMatrix, setAttackMatrix
     } = useBoardContext()
 
     //player
@@ -21,8 +21,6 @@ const PlayerProvider = ({children})=>{
     const [playerMove, setPlayerMove] = useState("MOVE"); //what the player is doing
     const [isPlayerMoveDone, setIsPlayerMoveDone] = useState(false); //if the player has completed the move or not
 
-    const [movementMatrix, setMovementMatrix] = useState(newMatrix(N,M,0))
-    const [attackMatrix, setAttackMatrix] = useState(newMatrix(N,M,0))
     //PS LIST
     //READY
     //WAIT
@@ -53,6 +51,15 @@ const PlayerProvider = ({children})=>{
     const setPlayerAttack = ()=>{
         setPlayerMove("ATTACK")
     }
+    const setPlayerSpells = ()=>{
+        setPlayerMove("SPELLS")
+    }
+    const setPlayerAbilities = ()=>{
+        setPlayerMove("ABILITIES")
+    }
+    const setPlayerItems = ()=>{
+        setPlayerMove("ITEMS")
+    }
 
     //attack
     const handleAttack=(x,y)=>{ //when you click on an attackbox
@@ -60,24 +67,18 @@ const PlayerProvider = ({children})=>{
     }
 
     const handleAttackEnemy = (enemy_id)=>{//when you click on an attackable entity
-        if(playerMove==="ATTACK"){
-            let x=entitiesPos[enemy_id].xpos
-            let y=entitiesPos[enemy_id].ypos
-            if(attackMatrix[y][x]===2){//enemy attacked, is an enemy!
-                //console.log(entities[enemy_id])
-                hitEntity(enemy_id, entities[activeEntity.id].stats.strenght)
-                setAttackMatrix(newMatrix(N,M,0)) //reset Attack matrix to 0 after attack
-
-                //reset Also the MovementMatrix (if the enemy dies, now you can go!)
-                let initmovementMatrix = generateMovementMatrix(N,M,matrix, entitiesMatrix, entitiesPos[activeEntity.id], playerMovement);
-                setMovementMatrix(initmovementMatrix);
-                //reset Also the MovementMatrix
-
-                setIsPlayerMoveDone(true)
-            }
-            
+        let x=entitiesPos[enemy_id].xpos
+        let y=entitiesPos[enemy_id].ypos
+        if(attackMatrix[y][x]===2){//enemy attacked, is an enemy!
+            //console.log(entities[enemy_id])
+            hitEntity(enemy_id, entities[activeEntity.id].stats.strenght)
+            setAttackMatrix(newMatrix(N,M,0)) //reset Attack matrix to 0 after attack
+            //reset Also the MovementMatrix (if the enemy dies, now you can go!)
+            let initmovementMatrix = generateMovementMatrix(N,M,matrix, entitiesMatrix, entitiesPos[activeEntity.id], playerMovement);
+            setMovementMatrix(initmovementMatrix);
+            //reset Also the MovementMatrix
+            setIsPlayerMoveDone(true)
         }
-        
     }
     //attack
     //player moves
@@ -120,10 +121,10 @@ const PlayerProvider = ({children})=>{
 
     useEffect(()=>{
         //console.log(playerMove)
-        if(playerMove==="ATTACK" && !isPlayerMoveDone){
+        if(!isPlayerMoveDone && activeEntity.team === "a"){
             setAttackMatrix(generateAttackMatrix(N,M,matrix, entitiesMatrix, entitiesPos[activeEntity.id], entities, entities[activeEntity.id].weapon_type));
         }
-    },[playerMove])
+    },[activeEntity, playerMovement])
 
     useEffect(()=>{//set the active pg (ally team)
         if(activeEntity.team === "a" && entitiesMatrix.length>0){
@@ -141,7 +142,9 @@ const PlayerProvider = ({children})=>{
         if(activeEntity.team === "a" && entitiesMatrix.length>0){
             let initmovementMatrix = generateMovementMatrix(N,M,matrix, entitiesMatrix, entitiesPos[activeEntity.id], playerMovement);
             setMovementMatrix(initmovementMatrix);
+            setAttackMatrix(generateAttackMatrix(N,M,matrix, entitiesMatrix, entitiesPos[activeEntity.id], entities, entities[activeEntity.id].weapon_type));
             //console.log(initmovementMatrix)
+
         }
     },[playerMovement, activeEntity])
 
@@ -158,6 +161,7 @@ const PlayerProvider = ({children})=>{
             setPlayerWait, setPlayerReady, changePlayerStatus, handleClick,
             playerStatus, movementMatrix, handleHoverMouse,
             mouseHover, playerMove, setPlayerAttack, setPlayerMoving, attackMatrix,
+            setPlayerItems,setPlayerAbilities,setPlayerSpells,
             handleAttack, handleAttackEnemy
         }}>
             {children}
